@@ -1,0 +1,3 @@
+creating sequence in Database
+log4j-appenders,console,file appender,rollingfileappender
+Junit-Test cases

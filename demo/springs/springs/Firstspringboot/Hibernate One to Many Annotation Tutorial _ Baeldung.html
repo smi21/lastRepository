@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://www.baeldung.com/hibernate-one-to-many -->
+<html lang="en-US" class="no-js"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/identify"></script><script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/track"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link type="text/css" media="all" href="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/autoptimize_fc62a9157befe107c17d9cde6cb86f96.css" rel="stylesheet"><title>Hibernate One to Many Annotation Tutorial | Baeldung</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="pingback" href="http://www.baeldung.com/xmlrpc.php">
+<link rel="apple-touch-icon" sizes="57x57" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/manifest.json">
+<link rel="mask-icon" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/safari-pinned-tab.svg" color="#63b175">
+<link rel="shortcut icon" href="http://www.baeldung.com/wp-content/themes/baeldung/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="http://www.baeldung.com/wp-content/themes/baeldung/favicon/mstile-144x144.png">
+<meta name="msapplication-config" content="http://www.baeldung.com/wp-content/themes/baeldung/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+<link rel="author" href="https://plus.google.com/+BaeldungTutorials/">
+<meta name="description" content="In this tutorial we&#39;ll have a look at the one-to-many mapping using JPA annotations with a practical example.">
+<link rel="canonical" href="http://www.baeldung.com/hibernate-one-to-many">
+<meta property="og:title" content="Hibernate One to Many Annotation Tutorial | Baeldung">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.baeldung.com/hibernate-one-to-many">
+<meta property="og:image" content="http://www.baeldung.com/wp-content/uploads/2016/10/social-Persistence-On-Baeldung-1.jpg">
+<meta property="og:site_name" content="Baeldung">
+<meta property="og:description" content="In this tutorial we&#39;ll have a look at the one-to-many mapping using JPA annotations with a practical example.">
+<meta property="article:published_time" content="2017-02-08T19:07:28Z">
+<meta property="article:modified_time" content="2017-02-08T20:50:22Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@baeldung">
+<meta name="twitter:domain" content="www.baeldung.com">
+<meta name="twitter:title" content="Hibernate One to Many Annotation Tutorial | Baeldung">
+<meta name="twitter:description" content="In this tutorial we&#39;ll have a look at the one-to-many mapping using JPA annotations with a practical example.">
+<meta name="twitter:image" content="http://www.baeldung.com/wp-content/uploads/2016/10/social-Persistence-On-Baeldung-1.jpg">
+
+<link rel="dns-prefetch" href="http://www.baeldung.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<script type="text/javascript" async="" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/9539554.js.download"></script><script src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/512471148948613" async=""></script><script async="" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/fbevents.js.download"></script><script async="" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/analytics.js.download"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.baeldung.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<style>
+        .wi_webinar_widget {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            /*border: 1px solid rgba(0,0,0,0.1);*/
+            /*border-bottom: 2px solid rgba(0,0,0,0.2);*/
+            /*padding: 10px;*/
+            margin: 15px 10px;
+
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+        }
+
+        .webinar_title {
+            text-align: center;
+            font-size: 24px;
+            line-height: 36px;
+            padding: 20px;
+            border-bottom: 1px solid #DDD;
+            color: #222222;
+        }
+
+        .wi_webinar_date {
+            background-color: #C95456;
+            color: #FFF;
+            /*font-weight: bold;*/
+            text-align: center;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            border-top: 2px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .wi_webinar_sign_up {
+            text-align: center;
+            background-color: #F7F7F7;
+            padding: 20px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            color: #222222;
+        }
+
+        .wi_webinar_headline1 {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .wi_webinar_headline2 {
+            display: block;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .wi_signup_btn {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            width: 100% !important;
+            background-color: #55B369 !important;
+            display: block !important;
+            margin-top: 10px !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
+            padding: 10px !important;
+            border-radius: 5px !important;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2) !important;
+            text-decoration: none !important;
+            color: #FFF !important;
+            height: 46px !important;
+            line-height: 23px !important;
+        }
+
+        .wi_signup_btn:hover {
+            text-decoration: none !important;
+            color: #FFF !important;
+            background-color: #4ba05e !important;
+        }
+
+        .wi_webinar_input {
+            display: block;
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 5px;
+            height: 46px;
+            line-height: 46px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .wi_webinar_spam {
+            border-top: 1px solid #DDD;
+            padding-top: 15px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            font-size: 10px;
+            color: #757575;
+        }
+    </style>
+<script type="text/javascript">
+/* <![CDATA[ */
+var getTemplateUrl = {"templateUrl":"http:\/\/www.baeldung.com\/wp-content\/themes\/baeldung"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/jquery.js.download"></script>
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/jquery-migrate.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wp_surveys = [];
+wp_surveys = [];;
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var THO_Head = {"variations":{"27139":{"variations":{"189":"Introduction to the Java ArrayDeque","190":"ArrayDeque in Java"},"test_id":"93","winners":[]},"27095":{"variations":{"185":"Customizing the Order of Tests in JUnit 5","186":"The Order of Tests in JUnit 5"},"test_id":"91","winners":[]}},"post_id":"17111","element_tag":"thrive_headline","woo_tag":"tho_woo"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/header.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpdiscuzAjaxObj = {"url":"http:\/\/www.baeldung.com\/wp-admin\/admin-ajax.php","wpdiscuz_options":{"wc_hide_replies_text":"Hide Replies","wc_show_replies_text":"Show Replies","wc_msg_required_fields":"Please fill out required fields","wc_invalid_field":"Some of field value is invalid","wc_error_empty_text":"please fill out this field to comment","wc_error_url_text":"url is invalid","wc_error_email_text":"email address is invalid","wc_invalid_captcha":"Invalid Captcha Code","wc_login_to_vote":"You Must Be Logged In To Vote","wc_deny_voting_from_same_ip":"You are not allowed to vote for this comment","wc_self_vote":"You cannot vote for your comment","wc_vote_only_one_time":"You've already voted for this comment","wc_voting_error":"Voting Error","wc_held_for_moderate":"Comment awaiting moderation","wc_comment_edit_not_possible":"Sorry, this comment no longer possible to edit","wc_comment_not_updated":"Sorry, the comment was not updated","wc_comment_not_edited":"You've not made any changes","wc_new_comment_button_text":"new comment","wc_new_comments_button_text":"new comments","wc_new_reply_button_text":"new reply on your comment","wc_new_replies_button_text":"new replies on your comments","wc_msg_input_min_length":"Input is too short","wc_msg_input_max_length":"Input is too long","is_user_logged_in":false,"commentListLoadType":"0","lazyLoadOnPageLoad":0,"commentListUpdateType":"0","commentListUpdateTimer":"30","liveUpdateGuests":"1","wc_comment_bg_color":"#FEFEFE","wc_reply_bg_color":"#F8F8F8","wordpress_comment_order":"asc","commentsVoteOrder":false,"wordpressThreadCommentsDepth":"5","wordpressIsPaginate":"","commentTextMaxLength":null,"storeCommenterData":100000,"isCaptchaInSession":true,"isGoodbyeCaptchaActive":false,"facebookAppID":"","cookiehash":"c0cc64a9cc1c7a2943b86b812a2db56e","version":"4.1.1","wc_post_id":17111,"loadLastCommentId":0,"lastVisitKey":"wpdiscuz_last_visit","lastVisitExpires":1515066721,"lastVisitCookie":{"1":{"18815":1512129987,"17111":1512474721}},"wc_captcha_show_for_guest":1,"wc_captcha_show_for_members":"0","is_email_field_required":1}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var aamLocal = {"nonce":"df97fae955","ajaxurl":"http:\/\/www.baeldung.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<link rel="https://api.w.org/" href="http://www.baeldung.com/wp-json/">
+<link rel="shortlink" href="http://www.baeldung.com/?p=17111">
+<link rel="alternate" type="application/json+oembed" href="http://www.baeldung.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.baeldung.com%2Fhibernate-one-to-many">
+<link rel="alternate" type="text/xml+oembed" href="http://www.baeldung.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.baeldung.com%2Fhibernate-one-to-many&amp;format=xml">
+<style type="text/css">#tve_editor .ttfm1{font-family: 'Lato' !important;font-weight: 400 !important;}.ttfm1 input, .ttfm1 select, .ttfm1 textarea, .ttfm1 button {font-family: 'Lato' !important;font-weight: 400 !important;}#tve_editor .ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong{font-weight: 700 !important;}.ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong input, .ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong select, .ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong textarea, .ttfm1.bold_text,.ttfm1 .bold_text,.ttfm1 b,.ttfm1 strong button {font-weight: 700 !important;}#tve_editor .ttfm2{font-family: 'Lora' !important;font-weight: 400 !important;}.ttfm2 input, .ttfm2 select, .ttfm2 textarea, .ttfm2 button {font-family: 'Lora' !important;font-weight: 400 !important;}#tve_editor .ttfm2.bold_text,.ttfm2 .bold_text,.ttfm2 b,.ttfm2 strong{font-weight: 700 !important;}.ttfm2.bold_text,.ttfm2 .bold_text,.ttfm2 b,.ttfm2 strong input, .ttfm2.bold_text,.ttfm2 .bold_text,.ttfm2 b,.ttfm2 strong select, .ttfm2.bold_text,.ttfm2 .bold_text,.ttfm2 b,.ttfm2 strong textarea, .ttfm2.bold_text,.ttfm2 .bold_text,.ttfm2 b,.ttfm2 strong button {font-weight: 700 !important;}#tve_editor .ttfm3{font-family: 'Oswald' !important;font-weight: 400 !important;}.ttfm3 input, .ttfm3 select, .ttfm3 textarea, .ttfm3 button {font-family: 'Oswald' !important;font-weight: 400 !important;}#tve_editor .ttfm3.bold_text,.ttfm3 .bold_text,.ttfm3 b,.ttfm3 strong{font-weight: 700 !important;}.ttfm3.bold_text,.ttfm3 .bold_text,.ttfm3 b,.ttfm3 strong input, .ttfm3.bold_text,.ttfm3 .bold_text,.ttfm3 b,.ttfm3 strong select, .ttfm3.bold_text,.ttfm3 .bold_text,.ttfm3 b,.ttfm3 strong textarea, .ttfm3.bold_text,.ttfm3 .bold_text,.ttfm3 b,.ttfm3 strong button {font-weight: 700 !important;}#tve_editor .ttfm4{font-family: 'Paytone One' !important;font-weight: 400 !important;}.ttfm4 input, .ttfm4 select, .ttfm4 textarea, .ttfm4 button {font-family: 'Paytone One' !important;font-weight: 400 !important;}#tve_editor .ttfm5{font-family: 'Pathway Gothic One' !important;font-weight: 400 !important;}.ttfm5 input, .ttfm5 select, .ttfm5 textarea, .ttfm5 button {font-family: 'Pathway Gothic One' !important;font-weight: 400 !important;}#tve_editor .ttfm6{font-family: 'Raleway' !important;font-weight: 300 !important;}.ttfm6 input, .ttfm6 select, .ttfm6 textarea, .ttfm6 button {font-family: 'Raleway' !important;font-weight: 300 !important;}#tve_editor .ttfm6.bold_text,.ttfm6 .bold_text,.ttfm6 b,.ttfm6 strong{font-weight: 700 !important;}.ttfm6.bold_text,.ttfm6 .bold_text,.ttfm6 b,.ttfm6 strong input, .ttfm6.bold_text,.ttfm6 .bold_text,.ttfm6 b,.ttfm6 strong select, .ttfm6.bold_text,.ttfm6 .bold_text,.ttfm6 b,.ttfm6 strong textarea, .ttfm6.bold_text,.ttfm6 .bold_text,.ttfm6 b,.ttfm6 strong button {font-weight: 700 !important;}#tve_editor .ttfm7{font-family: 'Raleway' !important;font-weight: 600 !important;}.ttfm7 input, .ttfm7 select, .ttfm7 textarea, .ttfm7 button {font-family: 'Raleway' !important;font-weight: 600 !important;}#tve_editor .ttfm7.bold_text,.ttfm7 .bold_text,.ttfm7 b,.ttfm7 strong{font-weight: 700 !important;}.ttfm7.bold_text,.ttfm7 .bold_text,.ttfm7 b,.ttfm7 strong input, .ttfm7.bold_text,.ttfm7 .bold_text,.ttfm7 b,.ttfm7 strong select, .ttfm7.bold_text,.ttfm7 .bold_text,.ttfm7 b,.ttfm7 strong textarea, .ttfm7.bold_text,.ttfm7 .bold_text,.ttfm7 b,.ttfm7 strong button {font-weight: 700 !important;}</style>
+
+<style type="text/css">
+.syntaxhighlighter { line-height: 1.2em }
+.syntaxhighlighter,
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+font-size: 12px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.syntaxhighlighter table caption {
+/* For Title(Caption) */  
+font-size: 14px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.syntaxhighlighter.nogutter td.code .line {
+/* Set the left padding space when no-gutter in ver. 3.0 */  
+padding-left: 3px !important;
+}
+.syntaxhighlighter {
+/* For Chrome/Safari(WebKit) */  
+/* Hide the superfluous vertical scrollbar in ver. 3.0 */  
+overflow-y: hidden !important;
+padding: 1px !important;
+}
+.widget-area.syntaxhighlighter a,
+.widget-area.syntaxhighlighter div,
+.widget-area.syntaxhighlighter code,
+.widget-area.syntaxhighlighter table,
+.widget-area.syntaxhighlighter table td,
+.widget-area.syntaxhighlighter table tr,
+.widget-area.syntaxhighlighter table tbody,
+.widget-area.syntaxhighlighter table thead,
+.widget-area.syntaxhighlighter table caption,
+.widget-area.syntaxhighlighter textarea {
+/* For Widget */  
+font-size: 14px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.widget-area table caption {
+/* For Widget */  
+/* For Title(Caption) */  
+font-size: 10px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+</style>
+
+<style type="text/css">#wpcomm .wc_new_comment{background:#00B38F;}#wpcomm .wc_new_reply{background:#00B38F;}#wpcomm .wc-form-wrapper{background:#F9F9F9;}#wpcomm select,#wpcomm input[type="text"],#wpcomm input[type="email"],#wpcomm input[type="url"],#wpcomm input[type="date"],#wpcomm input[type="color"]{border:#D9D9D9 1px solid;}#wpcomm .wc-comment .wc-comment-right{background:#FEFEFE;}#wpcomm .wc-reply .wc-comment-right{background:#F8F8F8;}#wpcomm .wc-comment-text{font-size:14px;color:#555;}#wpcomm .wc-blog-administrator > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-administrator > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-administrator > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-author > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-author > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-author > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-contributor > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-contributor > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-contributor > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-editor > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-editor > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-editor > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-subscriber > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-subscriber > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-subscriber > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-visual2 > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-visual2 > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-visual2 > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-marketing > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-marketing > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-marketing > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-backwpup_admin > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-backwpup_admin > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-backwpup_admin > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-backwpup_check > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-backwpup_check > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-backwpup_check > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-backwpup_helper > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-backwpup_helper > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-backwpup_helper > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-senioreditor > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-senioreditor > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-senioreditor > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-post_author > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-post_author > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-post_author > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-guest > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-guest > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-guest > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-authorplus > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-authorplus > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-authorplus > .wc-comment-left .wc-comment-label{background:#00B38F;}#wpcomm .wc-blog-wtt_user > .wc-comment-right .wc-comment-author,#wpcomm .wc-blog-wtt_user > .wc-comment-right .wc-comment-author a{color:#00B38F;}#wpcomm .wc-blog-wtt_user > .wc-comment-left .wc-comment-label{background:#00B38F;}.wc-load-more-submit{border:1px solid #D9D9D9;}#wpcomm .wc-new-loaded-comment > .wc-comment-right{background:#FFFAD6;}.comments-area{width:auto;}.wpdiscuz-front-actions{background:#F9F9F9;}.wpdiscuz-subscribe-bar{background:#F9F9F9;}.wpdiscuz-sort-buttons{color:#bbbbbb;}.wpdiscuz-sort-button{color:#bbbbbb; cursor:pointer;}.wpdiscuz-sort-button:hover{color:#00B38F;cursor:pointer;}.wpdiscuz-sort-button-active{color:#00B38F!important;cursor:default!important;}#wpcomm .page-numbers{color:#555;border:#555 1px solid;}#wpcomm span.current{background:#555;}#wpcomm .wpdiscuz-readmore{cursor:pointer;color:#00B38F;} #wpcomm .wpdiscuz-textarea-wrap{border:#D9D9D9 1px solid;} .wpd-custom-field .wcf-pasiv-star, #wpcomm .wpdiscuz-item .wpdiscuz-rating > label {color: #DDDDDD;}#wpcomm .wpdiscuz-item .wpdiscuz-rating:not(:checked) > label:hover,.wpdiscuz-rating:not(:checked) > label:hover ~ label {   }#wpcomm .wpdiscuz-item .wpdiscuz-rating > input ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:not(:checked) ~ label:hover ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:not(:checked) ~ label:hover ~ label{color: #FFED85;} #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > label:hover ~ input:checked ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked + label:hover ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover ~ label, .wpd-custom-field .wcf-activ-star, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label{ color:#FFD700;} #wpcomm .wc-cta-button:hover{border: 1px solid #00B38F!important; background:#00B38F!important; color:#fff!important;} #wpcomm .wc-cta-active{border: 1px solid #00B38F!important; background:#00B38F!important; color:#fff!important;}#wpcomm .wpf-cta:hover{color:#fff!important; background:#00B38F!important; border:1px solid #00B38F!important;}
+        
+#wpcomm .wpf-cta{ border: 1px solid #cccccc; color:#bbbbbb; }
+#wpcomm .wc-cta-button{ background:#888888; border:1px solid #888888; color:#ffffff;}
+#wpcomm .wc-cta-button-x{ background:#888888; border:1px solid #888888; color:#ffffff;}
+#wpcomm .wc-vote-link{border:1px solid #bbbbbb; color:#aaaaaa;}
+#wpcomm .wc-vote-result{border-top: 1px solid #bbbbbb; border-bottom: 1px solid #bbbbbb; color:#aaaaaa;}
+#wpcomm .wc-vote-result.wc-vote-result-like{border:1px solid #bbbbbb;}
+#wpcomm .wc-vote-result.wc-vote-result-dislike{border:1px solid #bbbbbb;}
+</style>
+
+<style type="text/css">.car-collapse .car-yearmonth { cursor: s-resize; } </style>
+<script type="text/javascript">
+		/* <![CDATA[ */
+			jQuery(document).ready(function() {
+				jQuery('.car-collapse').find('.car-monthlisting').hide();
+				jQuery('.car-collapse').find('.car-monthlisting:first').show();
+				jQuery('.car-collapse').find('.car-yearmonth').click(function() {
+					jQuery(this).next('ul').slideToggle('fast');
+				});
+				jQuery('.car-collapse').find('.car-toggler').click(function() {
+					if ( 'Expand All' == jQuery(this).text() ) {
+						jQuery(this).parent('.car-container').find('.car-monthlisting').show();
+						jQuery(this).text('Collapse All');
+					}
+					else {
+						jQuery(this).parent('.car-container').find('.car-monthlisting').hide();
+						jQuery(this).text('Expand All');
+					}
+					return false;
+				});
+			});
+		/* ]]> */
+	</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-26064837-1', 'auto');
+  ga('send', 'pageview');
+  setTimeout("ga('send', 'event', 'Time on page', 'more than 2.5 minutes')", 150000);
+  
+</script>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '512471148948613');
+fbq('track', "PageView");</script>
+<noscript>&lt;img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=512471148948613&amp;ev=PageView&amp;noscript=1"
+/&gt;</noscript>
+
+<script type="text/javascript">
+  var _dcq = _dcq || [];
+  var _dcs = _dcs || {}; 
+  _dcs.account = '9539554';
+  
+  (function() {
+    var dc = document.createElement('script');
+    dc.type = 'text/javascript'; dc.async = true; 
+    dc.src = '//tag.getdrip.com/9539554.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(dc, s);
+  })();
+</script>
+
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script><script type="text/javascript" async="" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/bsa.js.download"></script>
+ 
+
+
+<!--[if lt IE 9]>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+
+<!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+<!--[if lt IE 9]>
+                  <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+        <![endif]-->
+<script type="text/javascript" id="_bsap_js_a46ade12460854312b57879d579e1ee2" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/s_a46ade12460854312b57879d579e1ee2.js.download" async="async"></script><script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/pro.js.download" id="_bsap_premium_pro"></script><script type="text/javascript" id="_bsaPRO_js" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/saved_resource" async="async"></script><link rel="stylesheet" id="tve_leads_forms-css" type="text/css" href="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/frontend.css"><link rel="stylesheet" id="tve-leads-two_set-css" type="text/css" href="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/two_set.css"><link rel="stylesheet" id="tve-leads-font-9062833c9baa57b288ba47a7993dc1c0-css" type="text/css" href="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/css"></head>
+<body class="post-template-default single single-post postid-17111 single-format-standard wpdiscuz_4.1.1">
+<nav class="menu-container">
+<div class="header--menu">
+<a class="nav--logo_mobile" href="http://baeldung.com/" title="Baeldung">
+<img alt="The Baeldung logo" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/logo.svg">
+</a>
+<a href="http://www.baeldung.com/hibernate-one-to-many#" class="menu-mobile" title="Navigation" onclick="veggieBurger.reset().play();">
+<svg version="1.1" id="veggieBurger" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35;" xml:space="preserve">
+<path style="fill: none; stroke: rgb(255, 255, 255); stroke-width: 2; stroke-linecap: square; stroke-linejoin: bevel; stroke-miterlimit: 10; stroke-dasharray: 30, 32; stroke-dashoffset: 0;" d="M2.5,17.5L32.5,17.5"></path>
+<path style="fill: none; stroke: rgb(255, 255, 255); stroke-width: 2; stroke-linecap: square; stroke-linejoin: bevel; stroke-miterlimit: 10; stroke-dasharray: 30, 32; stroke-dashoffset: 0;" d="M2.5,6.5L32.5,6.5"></path>
+<path style="fill: none; stroke: rgb(255, 255, 255); stroke-width: 2; stroke-linecap: square; stroke-linejoin: bevel; stroke-miterlimit: 10; stroke-dasharray: 30, 32; stroke-dashoffset: 0;" d="M2.5,28.5L32.5,28.5"></path>
+</svg>
+</a>
+<ul id="menu-main-menu" class="nav--menu"><li class="nav--logo"><a href="http://www.baeldung.com/" title="Baeldung"><img src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/logo.svg"></a></li><li class="nav--menu_item  menu-start-here"><a class="nav--menu_item_anchor" href="http://www.baeldung.com/start-here">Start Here</a></li>
+<li class="nav--menu_item nav--menu_item_darkened menu-courses"><a id="menu-item-17021" class="nav--menu_item_anchor nav--menu_item_withDropdown" href="javascript:void(0)">Courses&nbsp;<span class="menu--item_normal">▼</span><span class="menu--item_active">▲</span></a>
+<div class="nav--dropdown" style="display: none;">
+<ul class="nav--dropdown_content">
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/rest-with-spring-course" title="The “REST With Spring” Course">
+<div class="dropdown--item_icon">
+<svg id="IcnCoursesRestWithSpring" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 190" enable-background="new 0 0 180 190"><g><path fill="none" stroke="#3C3C3C" stroke-width="2" stroke-miterlimit="10" d="M84.07 29.4C43.5 32.44 11.5 66.3 11.5 107.66c0 43.35 35.15 78.5 78.5 78.5s78.5-35.15 78.5-78.5c0-40.04-29.98-73.05-68.72-77.87" style="stroke-dasharray: 478, 480; stroke-dashoffset: 479;"></path><path fill="none" stroke="#63B175" stroke-width="2" stroke-miterlimit="10" d="M103.26 78.5l.3.14s.3 1.08.48 1.6c.56 1.82 1.05 3.4.4 4.9-1 2.28-3.32 2.62-4.6 2.12-.75-.3-1.42-.93-1.83-1.73-.52-1-.55-2.13-.1-3.18.75-1.74 2.64-2.6 4.63-3.52.24-.1.73-.33.73-.33z" style="stroke-dasharray: 26, 28; stroke-dashoffset: 27;"></path><g fill="none" stroke="#63B175" stroke-width="2" stroke-miterlimit="10"><path d="M119.6 55.02c-8.5 1.72-15.2 7.32-18.66 14.58 6 5.35 14.38 7.9 22.86 6.18 8.5-1.72 15.2-7.32 18.67-14.58-6-5.35-14.37-7.9-22.87-6.18zM100.94 69.6l30.23-6.12" style="stroke-dasharray: 130, 132; stroke-dashoffset: 131;"></path></g><g fill="none" stroke="#fff" stroke-width="2" stroke-miterlimit="10"><path d="M111.92 40.12l-7.97 4.85c.05.32.05.34.1.65l4.26 1.03c.06.3.06.34.1.65l-7.96 4.85" style="stroke-dasharray: 25, 27; stroke-dashoffset: 26;"></path><path d="M112.1 51.78c-4.67 4.9-15.8 4.7-15.8 4.7s-.7-11.08 3.96-16c4.67-4.9 15.8-4.7 15.8-4.7s.7 11.1-3.96 16z" style="stroke-dasharray: 68, 70; stroke-dashoffset: 69;"></path></g><g fill="none" stroke="#63B175" stroke-width="2" stroke-miterlimit="10"><path d="M82.87 22.1c0 7.46 3.58 14.08 9.12 18.25 5.54-4.17 9.12-10.8 9.12-18.26 0-7.47-3.58-14.1-9.13-18.26-5.55 4.16-9.13 10.8-9.13 18.25zM92 97.4V22.1" style="stroke-dasharray: 160, 162; stroke-dashoffset: 161;"></path></g><g><path fill="#63B175" d="M68.3 57.3c5.27 5.27 12.5 7.42 19.35 6.45.97-6.87-1.18-14.1-6.46-19.36-5.28-5.3-12.5-7.44-19.37-6.47C60.86 44.8 63 52 68.3 57.3z" style="stroke-dasharray: 85, 87; stroke-dashoffset: 86;"></path><path fill="none" stroke="#535353" stroke-width="2" stroke-miterlimit="10" d="M68.86 44.96l18.8 18.8" style="stroke-dasharray: 27, 29; stroke-dashoffset: 28;"></path></g><g fill="none" stroke="#63B175" stroke-width="2" stroke-miterlimit="10"><path d="M57.27 84.28c9.22 2.3 18.52-.07 25.38-5.63-3.43-8.14-10.5-14.62-19.74-16.93-9.2-2.3-18.5.07-25.37 5.64 3.43 8.13 10.5 14.6 19.74 16.92zM59.73 72.9l32.84 8.23" style="stroke-dasharray: 142, 144; stroke-dashoffset: 143;"></path></g><g fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10"><path d="M127.36 115.64H56.63L55.6 99.4c-.05-1.1.8-2 1.9-2h69c1.08 0 1.94.9 1.88 2l-1.02 16.24zM117.67 162.12l4-46.48H62.32l4 46.48c.07.97.9 1.72 1.87 1.72h47.6c.97 0 1.78-.75 1.87-1.72zM63.98 134.8h32.94M64.76 143.93H88.3" style="stroke-dasharray: 441, 443; stroke-dashoffset: 442;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+REST with Spring
+</h3>
+<p class="dropdown--item_excerpt">
+ The canonical reference for building a production grade API with Spring.
+</p>
+</div>
+</a>
+</li>
+
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/learn-spring-security-course" title="The “Learn Spring Security” Course">
+<div class="dropdown--item_icon">
+<svg id="IcnCoursesLearnSpringSecurity" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 190" enable-background="new 0 0 180 190"><g fill="none" stroke-width="2" stroke-miterlimit="10"><path stroke="#3C3C3C" d="M41.4 130.26c6 11.53 14.76 21.62 25.73 29.25l21.96 15.3 21.96-15.3c10.97-7.62 19.72-17.7 25.7-29.24M32.23 87.38v5.33c0 3.85.28 7.66.8 11.4m112.94-51.2V22.43H32.22V52.9" style="stroke-dasharray: 324, 326; stroke-dashoffset: 325;"></path><g stroke="#fff"><path transform="matrix(.243 -.97 .97 .243 99.351 184.706)" d="M164.976,28.705A3.031,3.197 0,1,1 171.038,28.705A3.031,3.197 0,1,1 164.976,28.705" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path d="M168.74 25.67l2.62-10.46 3.64.93M170.52 18.57l2.6.66" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path></g><g stroke="#63B175"><path d="M60.157000000000004,101.254A28.936,28.936 0,1,1 118.029,101.254A28.936,28.936 0,1,1 60.157000000000004,101.254" style="stroke-dasharray: 182, 184; stroke-dashoffset: 183;"></path><path d="M73.77 76.74v-12.4c0-8.17 6.16-15.3 14.3-15.82 7.98-.5 14.75 5.08 16.1 12.56.3 1.6 1.7 2.73 3.33 2.73 2.12 0 3.74-1.9 3.36-4-1.95-10.64-11.5-18.63-22.84-18.1-11.9.57-21.05 10.82-21.05 22.73v18.2c1.94-2.3 4.24-4.3 6.8-5.9z" style="stroke-dasharray: 163, 165; stroke-dashoffset: 164;"></path></g><g stroke="#fff"><path d="M70.37,101.254A18.723,18.723 0,1,1 107.816,101.254A18.723,18.723 0,1,1 70.37,101.254" style="stroke-dasharray: 118, 120; stroke-dashoffset: 119;"></path><path d="M83.98700000000001,101.254A5.106,5.106 0,1,1 94.199,101.254A5.106,5.106 0,1,1 83.98700000000001,101.254" style="stroke-dasharray: 33, 35; stroke-dashoffset: 34;"></path><path d="M89.1 82.53v6.2M89.1 113.8v6.18M107.82 101.25h-6.2M76.56 101.25h-6.2M102.33 88l-4.37 4.4M80.23 110.12l-4.38 4.37M102.33 114.5l-4.37-4.38M80.23 92.4L75.85 88" style="stroke-dasharray: 50, 52; stroke-dashoffset: 51;"></path></g><g stroke="#63B175"><path transform="matrix(.518 -.855 .855 .518 -64.521 158.503)" d="M105.185,136.502A3.197,3.031 0,1,1 111.57900000000001,136.502A3.197,3.031 0,1,1 105.185,136.502" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path d="M111.07 138.1l9.22 5.6-1.96 3.2M117.32 141.9l-1.4 2.3" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path><path transform="matrix(.243 -.97 .97 .243 -111.771 172.167)" d="M51.381,157.689A3.031,3.197 0,1,1 57.443,157.689A3.031,3.197 0,1,1 51.381,157.689" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path d="M55.15 154.65l2.62-10.45 3.64.9M56.93 147.56l2.6.65" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path><path transform="matrix(.735 -.678 .678 .735 -12.161 41.66)" d="M44.022999999999996,36.389A3.197,3.031 0,1,1 50.417,36.389A3.197,3.031 0,1,1 44.022999999999996,36.389" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path d="M49.36 38.67l7.3 7.92-2.76 2.53M54.32 44.05l-1.98 1.83" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path></g><g stroke="#63B175" clip-rule="evenodd"><path d="M134.05 82.1c-1.63-2-2.96-4.45-3.47-7.24.32 0 1.18.17 1.7.14-.28-1.58-1.73-5.64-.95-7.73.34.16 1.34.73 1.52.83.18-1.4.85-5.4 2.12-6.96.1.07 1.1.96 1.35 1.2.78-2.72 2.42-5.3 4.23-6.52.17.3.7 1.52.8 1.68 1.5-2.05 4.53-4.92 6.44-5.74.18.33.64 1.28.78 1.6 1.2-1.32 4.9-3.7 6.78-4.2.05.33.12 1.63.13 1.85 2.87-1.83 6.07-3.32 8.5-3.66-.03.45-.12 1.64-.14 1.98 2.8-1.7 6.5-2.7 9.33-3.24-.55 2.8-1.54 6.52-3.25 9.32.33-.02 1.52-.1 1.98-.13-.35 2.42-1.84 5.6-3.68 8.5.22 0 1.52.08 1.86.12-.5 1.88-2.88 5.57-4.2 6.77.32.15 1.27.6 1.6.8-.82 1.9-3.7 4.92-5.75 6.45.17.08 1.4.62 1.7.8-1.23 1.8-3.8 3.43-6.52 4.22.23.25 1.12 1.23 1.2 1.34-1.57 1.28-5.56 1.95-6.97 2.12.1.2.67 1.18.83 1.52-2.1.78-6.16-.67-7.75-.94-.02.5.14 1.38.15 1.7-2.83-.53-5.3-1.9-7.35-3.55l-3-3.02zm1.3 1.33s-1.98 2.55-4.1 5.28M41.14 85.13c-2.04 1.66-4.52 3.02-7.35 3.54 0-.3.16-1.18.13-1.7-1.58.28-5.64 1.73-7.73.95.15-.34.73-1.33.83-1.52-1.4-.17-5.4-.84-6.97-2.12.08-.1.96-1.1 1.2-1.34-2.7-.8-5.3-2.43-6.5-4.23.28-.16 1.5-.7 1.67-.78-2.06-1.53-4.92-4.54-5.75-6.45.34-.2 1.28-.65 1.6-.8-1.32-1.2-3.7-4.9-4.2-6.77.33-.05 1.63-.12 1.85-.13-1.84-2.9-3.33-6.08-3.67-8.5.46.02 1.64.1 1.98.13-1.7-2.8-2.7-6.5-3.24-9.32 2.82.54 6.53 1.53 9.32 3.24-.02-.34-.1-1.53-.12-1.98 2.42.34 5.6 1.83 8.5 3.67 0-.2.08-1.5.12-1.85 1.9.5 5.57 2.9 6.78 4.2.15-.3.6-1.26.8-1.6 1.9.83 4.92 3.7 6.45 5.75.08-.16.62-1.38.8-1.68 1.8 1.22 3.43 3.8 4.22 6.5.25-.22 1.23-1.1 1.34-1.18 1.3 1.56 1.96 5.55 2.13 6.96.2-.1 1.18-.67 1.52-.83.78 2.1-.67 6.15-.94 7.73.52.03 1.4-.13 1.7-.14-.5 2.8-1.84 5.23-3.47 7.25l-3 3.03zm5.78 3.58c-2.1-2.72-4.1-5.27-4.1-5.27M137.05 106.16c2.04-1.66 4.52-3.03 7.35-3.54 0 .3-.17 1.18-.15 1.7 1.6-.3 5.65-1.73 7.74-.95-.17.34-.74 1.33-.84 1.5 1.4.2 5.4.86 6.96 2.14-.07.12-.96 1.1-1.2 1.35 2.72.8 5.3 2.43 6.52 4.23-.3.17-1.52.7-1.7.8 2.07 1.5 4.94 4.53 5.77 6.44-.33.2-1.28.65-1.6.8 1.32 1.2 3.7 4.9 4.2 6.77-.33.04-1.63.1-1.85.1 1.84 2.9 3.33 6.1 3.68 8.52-.46-.02-1.65-.1-1.98-.13 1.7 2.8 2.7 6.5 3.24 9.3-2.83-.53-6.54-1.52-9.34-3.23.02.34.1 1.53.13 1.98-2.43-.34-5.63-1.83-8.5-3.67-.02.22-.1 1.52-.14 1.85-1.88-.5-5.57-2.88-6.78-4.2-.14.32-.6 1.26-.8 1.6-1.9-.82-4.92-3.7-6.44-5.75-.08.17-.62 1.4-.8 1.7-1.8-1.23-3.44-3.82-4.22-6.52-.25.23-1.24 1.1-1.35 1.2-1.27-1.57-1.94-5.56-2.12-6.97-.18.08-1.18.66-1.52.82-.78-2.1.67-6.15.95-7.73-.52-.04-1.38.12-1.7.13.5-2.8 1.84-5.24 3.47-7.26l3-3zm-5.8-3.58c2.12 2.73 4.1 5.28 4.1 5.28M44.13 109.17c1.63 2.02 2.97 4.47 3.47 7.26-.3 0-1.18-.17-1.7-.14.28 1.57 1.73 5.63.95 7.72-.34-.16-1.33-.74-1.52-.83-.17 1.4-.84 5.4-2.12 6.95-.1-.07-1.08-.96-1.33-1.2-.8 2.7-2.43 5.3-4.23 6.52-.17-.3-.7-1.52-.8-1.7-1.52 2.07-4.54 4.94-6.45 5.76-.2-.34-.65-1.28-.8-1.6-1.2 1.32-4.9 3.7-6.78 4.2-.04-.33-.1-1.63-.12-1.85-2.9 1.84-6.08 3.33-8.5 3.67.02-.45.1-1.64.12-1.98-2.8 1.7-6.5 2.7-9.32 3.24.54-2.8 1.53-6.5 3.24-9.3-.34 0-1.52.1-1.98.12.35-2.42 1.83-5.62 3.67-8.5-.22 0-1.52-.08-1.85-.13.5-1.9 2.88-5.58 4.2-6.8-.32-.13-1.26-.6-1.6-.78.83-1.9 3.7-4.93 5.75-6.45-.17-.08-1.38-.62-1.68-.8 1.22-1.8 3.8-3.43 6.5-4.22-.23-.25-1.1-1.23-1.2-1.34 1.57-1.27 5.57-1.94 6.98-2.12-.1-.18-.67-1.17-.83-1.5 2.1-.8 6.15.66 7.73.93.03-.5-.13-1.37-.14-1.68 2.82.5 5.3 1.88 7.34 3.54l3 3zm-1.3-1.3s1.98-2.56 4.1-5.3M165.04 53.74c-11.62 5.45-24.65 23.07-29.68 29.7M13.14 53.74c11.62 5.45 24.65 23.07 29.7 29.7M165.04 137.55c-11.62-5.46-24.65-23.07-29.68-29.7M13.14 137.55c11.62-5.46 24.65-23.07 29.7-29.7" style="stroke-dasharray: 854, 856; stroke-dashoffset: 855;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+Learn Spring Security
+</h3>
+<p class="dropdown--item_excerpt">
+THE unique Spring Security education if you’re working with Java today.
+<br>
+<br>
+<br><b>UPDATE</b>: The prices are changing on Friday.
+</p>
+</div>
+</a>
+</li>
+
+</ul>
+</div></li>
+<li class="nav--menu_item  menu-guides"><a id="menu-item-17022" class="nav--menu_item_anchor nav--menu_item_withDropdown" href="javascript:void(0)">Guides&nbsp;<span class="menu--item_normal">▼</span><span class="menu--item_active">▲</span></a>
+<div class="nav--dropdown" style="display: none;">
+<ul class="nav--dropdown_content">
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/persistence-with-spring-series/" title="Persistence with Spring">
+<div class="dropdown--item_icon">
+<svg id="IcnGuidesPersistence" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" enable-background="new 0 0 180 180"><g fill="none" stroke-width="2" stroke-miterlimit="10"><g stroke="#949598"><path d="M49.46 157.25h105" style="stroke-dasharray: 105, 107; stroke-dashoffset: 106;"></path><path d="M75.46 170.25l-13-13h26zM153.46 72.25l10 10-10 10M43.46 117.5v39.75M80.96 164.75h73.5M76.24 29.75h77.22v120H51.36c-4.35 0-7.9 3.36-7.9 7.5 0 4.14 3.55 7.5 7.9 7.5h18.6M67.57 29.75h-16.2c-4.36 0-7.9 3.36-7.9 7.5v40.1" style="stroke-dasharray: 615, 617; stroke-dashoffset: 616;"></path></g><g stroke="#63B175" clip-rule="evenodd"><path d="M81.464,67.429A25,7.143 0,1,1 131.464,67.429A25,7.143 0,1,1 81.464,67.429" style="stroke-dasharray: 109, 111; stroke-dashoffset: 110;"></path><path d="M81.464,67.429A25,7.143 0,1,1 131.464,67.429A25,7.143 0,1,1 81.464,67.429" style="stroke-dasharray: 109, 111; stroke-dashoffset: 110;"></path><path d="M81.46 85.3v8.9c0 3.96 11.2 7.16 25 7.16s25-3.2 25-7.15v-8.9M81.46 94.2v8.94c0 3.95 11.2 7.15 25 7.15s25-3.2 25-7.16V94.2M81.46 103.14v8.93c0 3.95 11.2 7.14 25 7.14s25-3.18 25-7.13v-8.93M81.46 112.07V121c0 3.94 11.2 7.14 25 7.14s25-3.2 25-7.14v-8.93M81.46 67.43v8.93c0 3.94 11.2 7.14 25 7.14s25-3.2 25-7.14v-8.93M81.46 76.36v8.93c0 3.93 11.2 7.13 25 7.13s25-3.2 25-7.14v-8.94" style="stroke-dasharray: 434, 436; stroke-dashoffset: 435;"></path></g><path stroke="#fff" d="M136.38 24.53l-13.23 8.07c.08.5.1.55.17 1.07l7.07 1.7c.07.53.08.57.16 1.1l-13.24 8.06" style="stroke-dasharray: 41, 43; stroke-dashoffset: 42;"></path><g><path stroke="#949598" d="M84.455,12.954A3.155,3.155 0,1,1 90.765,12.954A3.155,3.155 0,1,1 84.455,12.954" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path stroke="#949598" d="M73.122,46.595A3.155,3.155 0,1,1 79.432,46.595A3.155,3.155 0,1,1 73.122,46.595" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path stroke="#949598" d="M74.92 26.27l10.48-11.1M72.98 33.67l2.52 9.87" style="stroke-dasharray: 26, 28; stroke-dashoffset: 27;"></path><path stroke="#949598" d="M88.77799999999999,40.3A2.162,2.162 0,1,1 93.102,40.3A2.162,2.162 0,1,1 88.77799999999999,40.3" style="stroke-dasharray: 14, 16; stroke-dashoffset: 15;"></path><path stroke="#949598" d="M57.827,36.366A2.162,2.162 0,1,1 62.150999999999996,36.366A2.162,2.162 0,1,1 57.827,36.366" style="stroke-dasharray: 14, 16; stroke-dashoffset: 15;"></path><path stroke="#949598" d="M60.341,11.912A2.162,2.162 0,1,1 64.665,11.912A2.162,2.162 0,1,1 60.341,11.912" style="stroke-dasharray: 14, 16; stroke-dashoffset: 15;"></path><path stroke="#949598" d="M63.43 13.86l1.2 2.2" style="stroke-dasharray: 3, 5; stroke-dashoffset: 4;"></path><path stroke="#949598" d="M65.97 18.5l2 3.66" stroke-dasharray="2.7869,2.7869" style="stroke-dasharray: 5, 7; stroke-dashoffset: 6;"></path><path stroke="#949598" d="M68.64 23.4l1.2 2.18M89.05 39.27l-2.17-1.25" style="stroke-dasharray: 5, 7; stroke-dashoffset: 6;"></path><path stroke="#949598" d="M83.88 36.3l-4.5-2.6" stroke-dasharray="3.4654,3.4654" style="stroke-dasharray: 6, 8; stroke-dashoffset: 7;"></path><path stroke="#949598" d="M77.87 32.84L75.7 31.6M61.88 35.33l2.13-1.3M65.9 32.9l2.14-1.3" style="stroke-dasharray: 8, 10; stroke-dashoffset: 9;"></path><path stroke="#63B175" d="M67.534,29.433A4.372,4.372 0,1,1 76.278,29.433A4.372,4.372 0,1,1 67.534,29.433" style="stroke-dasharray: 28, 30; stroke-dashoffset: 29;"></path></g><g stroke="#fff"><path d="M62.63 78.2c-1.58-.96-5.84-2.03-23.16-.52-18.56 1.63-21.16 3.5-22 4.13-4.45 3.28-3.8 15.96-3.6 18.52.34 3.38 1.87 14.6 6.7 16.98.93.46 3.8 1.86 22.4.23 17.32-1.5 21.32-3.3 22.7-4.5 3.76-3.27 3.34-13.34 3-17.55-.32-3.37-1.66-14.65-6.04-17.3zM47.3 98.07l-8.44 7.4c-.66.57-1.72.17-1.8-.74L35.9 91.5c-.07-.88.88-1.5 1.65-1.03l9.58 5.82c.63.38.7 1.28.16 1.77z" style="stroke-dasharray: 210, 212; stroke-dashoffset: 211;"></path></g><g stroke="#63B175"><path d="M160.643,111.942A2.821,2.821 0,1,1 166.285,111.942A2.821,2.821 0,1,1 160.643,111.942" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path><path d="M21.555999999999997,60.861A2.821,2.821 0,1,1 27.198,60.861A2.821,2.821 0,1,1 21.555999999999997,60.861" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path><path d="M32.056000000000004,126.999A2.821,2.821 0,1,1 37.698,126.999A2.821,2.821 0,1,1 32.056000000000004,126.999" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+Persistence
+</h3>
+<p class="dropdown--item_excerpt">
+The main persistence with Spring guides here at Baeldung.
+</p>
+</div>
+</a>
+</li>
+
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/rest-with-spring-series/" title="REST with Spring">
+<div class="dropdown--item_icon">
+<svg id="IcnGuidesRest" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" enable-background="new 0 0 180 180"><g fill="none" stroke-width="2" stroke-miterlimit="10"><g stroke="#949598"><path d="M50.42 20.47l10 10h-20zM138.44 89.23V37.97h-7.5M27.94 157.97h110.5v-33.8M130.94 124.17v26.3H28.84c-4.36 0-7.9 3.36-7.9 7.5 0 4.14 3.54 7.5 7.9 7.5h102.1M130.94 89.24V30.47H28.84c-4.36 0-7.9 3.36-7.9 7.5v120" style="stroke-dasharray: 800, 802; stroke-dashoffset: 801;"></path></g><path stroke="#fff" d="M106.628,17.348A2.821,2.821 0,1,1 112.27,17.348A2.821,2.821 0,1,1 106.628,17.348" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path><path stroke="#949598" d="M144.386,55.74A2.821,2.821 0,1,1 150.028,55.74A2.821,2.821 0,1,1 144.386,55.74" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path><g stroke="#63B175"><path d="M34.3 98.4c.05-.13.2-.2.34-.12.52.3 1.05.58 1.56.85 1.8.94 3.34 1.75 3.98 3.36.98 2.46-.53 4.47-1.85 5.05-.8.34-1.78.37-2.7.1-1.13-.38-2-1.2-2.46-2.32-.74-1.88.03-3.94.84-6.13.1-.26.2-.53.3-.8zM48.97 46.94c.14.04.2.2.12.33-.3.53-.57 1.06-.83 1.58-.9 1.8-1.7 3.36-3.3 4.02-2.46 1-4.5-.46-5.08-1.78-.37-.8-.42-1.78-.14-2.7.35-1.14 1.15-2.03 2.27-2.5 1.87-.76 3.94-.03 6.14.76.26.1.53.18.8.28z" style="stroke-dasharray: 54, 56; stroke-dashoffset: 55;"></path></g><g stroke="#fff"><path d="M155.13 91.4c-1.3-.94-4.93-2.2-20.15-2.2-16.3 0-18.7 1.45-19.5 1.92-4.12 2.5-4.5 13.6-4.55 15.86.05 2.98.53 12.87 4.56 15.32.76.47 3.17 1.9 19.5 1.9 15.2 0 18.83-1.25 20.13-2.2 3.52-2.55 3.92-11.37 3.93-15.06 0-2.96-.3-12.9-3.93-15.53zM140.24 107.57l-7.9 5.8c-.62.46-1.52.02-1.52-.78v-11.62c0-.78.88-1.24 1.5-.78l7.92 5.8c.52.4.52 1.18 0 1.57z" style="stroke-dasharray: 184, 186; stroke-dashoffset: 185;"></path></g><g stroke="#63B175"><path d="M90.6 73.64c-2.74 2.88-9.27 2.77-9.27 2.77s-.42-6.5 2.32-9.4c2.75-2.87 9.28-2.76 9.28-2.76s.42 6.5-2.32 9.4zM73.43 56.2c0 4.38 2.1 8.27 5.37 10.72 3.25-2.45 5.36-6.34 5.36-10.72 0-4.4-2.1-8.28-5.36-10.73-3.26 2.45-5.37 6.34-5.37 10.73zM78.8 100.43V56.2" style="stroke-dasharray: 134, 136; stroke-dashoffset: 135;"></path><path d="M64.28 75.7c3.1 3.1 7.34 4.37 11.37 3.8.58-4.04-.7-8.28-3.8-11.38-3.1-3.1-7.33-4.37-11.36-3.8-.58 4.04.68 8.28 3.78 11.38zM64.62 68.45L75.65 79.5" style="stroke-dasharray: 66, 68; stroke-dashoffset: 67;"></path><path d="M95.02 75.54c-5 1-8.94 4.3-10.97 8.57 3.53 3.15 8.45 4.65 13.43 3.64 5-1 8.94-4.3 10.97-8.57-3.53-3.14-8.44-4.64-13.43-3.63zM84.05 84.1l17.76-3.6" style="stroke-dasharray: 76, 78; stroke-dashoffset: 77;"></path><path d="M58.4 92.73c5.4 1.36 10.88-.04 14.9-3.3-2-4.8-6.17-8.6-11.6-9.95-5.4-1.36-10.87.04-14.9 3.3 2 4.8 6.17 8.6 11.6 9.95zM59.84 86.05l19.3 4.83M90.5 66.78l-4.68 2.86c.03.18.03.2.06.38l2.5.6c.03.2.03.2.06.38l-4.68 2.86" style="stroke-dasharray: 98, 100; stroke-dashoffset: 99;"></path><path d="M85.4 89.4c.1-.03.17 0 .2.1.08.3.17.62.27.93.33 1.07.62 2 .24 2.87-.57 1.35-1.95 1.54-2.7 1.25-.44-.18-.83-.55-1.07-1-.3-.6-.33-1.27-.07-1.88.45-1.03 1.55-1.53 2.73-2.07.13-.07.27-.13.4-.2z" style="stroke-dasharray: 15, 17; stroke-dashoffset: 16;"></path></g><g stroke="#949598"><path d="M99.57 111.16H58.02l-.6-9.55c-.04-.63.47-1.17 1.1-1.17h40.55c.63 0 1.14.54 1.1 1.18l-.6 9.56zM93.88 138.46l2.34-27.3H61.37l2.34 27.3c.06.57.54 1 1.1 1H92.8c.57 0 1.05-.43 1.1-1zM62.34 122.42H81.7M62.8 127.78h13.82" style="stroke-dasharray: 259, 261; stroke-dashoffset: 260;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+REST
+</h3>
+<p class="dropdown--item_excerpt">
+The main guides on REST APIs with Spring, here at Baeldung.
+</p>
+</div>
+</a>
+</li>
+
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/security-spring" title="Security with Spring">
+<div class="dropdown--item_icon">
+<svg id="IcnGuidesSecurity" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" enable-background="new 0 0 180 180"><g><g fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10"><path d="M41.17 155.15h103M144.17 106.62V83.65M144.17 136.46v11.2H42.07c-4.36 0-7.9 3.35-7.9 7.5 0 4.13 3.54 7.5 7.9 7.5h102.1M34.17 97.42v57.73M144.17 48.53V27.65H42.07c-4.36 0-7.9 3.36-7.9 7.5v36.7" style="stroke-dasharray: 596, 598; stroke-dashoffset: 597;"></path></g><g fill="none" stroke="#63B175" stroke-width="2" stroke-miterlimit="10"><path d="M68.168,100.888A25,25 0,1,1 118.168,100.888A25,25 0,1,1 68.168,100.888" style="stroke-dasharray: 158, 160; stroke-dashoffset: 159;"></path><path d="M76.99100000000001,100.888A16.177,16.177 0,1,1 109.345,100.888A16.177,16.177 0,1,1 76.99100000000001,100.888" style="stroke-dasharray: 102, 104; stroke-dashoffset: 103;"></path><path d="M88.756,100.888A4.412,4.412 0,1,1 97.58000000000001,100.888A4.412,4.412 0,1,1 88.756,100.888" style="stroke-dasharray: 28, 30; stroke-dashoffset: 29;"></path><path d="M93.17 84.7v2.95M93.17 114.12v2.94M109.34 100.9h-2.94M79.93 100.9H77M104.6 89.45l-2.07 2.08M83.8 110.25l-2.07 2.08M104.6 112.33l-2.07-2.08M83.8 91.53l-2.07-2.08M93.17 87.65v2.4M93.17 111.72v2.4M106.4 100.9H104M82.34 100.9h-2.4M102.53 91.53l-1.7 1.7M85.5 108.55l-1.7 1.7M102.53 110.25l-1.7-1.7M85.5 93.23l-1.7-1.7" style="stroke-dasharray: 43, 45; stroke-dashoffset: 44;"></path><path d="M79.93 79.7V69c0-7.06 5.32-13.22 12.36-13.67 6.88-.45 12.73 4.38 13.9 10.84.24 1.38 1.47 2.36 2.87 2.36 1.83 0 3.23-1.66 2.9-3.46-1.68-9.2-9.94-16.1-19.73-15.63-10.28.48-18.2 9.34-18.2 19.63V84.8c1.7-2 3.68-3.7 5.9-5.1z" style="stroke-dasharray: 141, 143; stroke-dashoffset: 142;"></path></g><g fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10"><path transform="matrix(.536 -.844 .844 .536 -85.721 107.536)" d="M51.984,131.788A3.031,3.197 0,1,1 58.046,131.788A3.031,3.197 0,1,1 51.984,131.788" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path d="M56.67 129.14l5.78-9.1 3.17 2.02M60.6 122.96l2.27 1.45" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path></g><g fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10"><path transform="matrix(.536 -.844 .844 .536 -17.704 81.064)" d="M61.732,56.645A3.197,3.031 0,1,1 68.126,56.645A3.197,3.031 0,1,1 61.732,56.645" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path d="M62.28 55l-9.1-5.8 2.02-3.16M56.1 51.06l1.45-2.27" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path></g><g><path fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10" d="M135.28 106.06c.05.27.08 1.03.2 1.46 1.3-.53 4.46-2.52 6.38-2.25-.07.32-.37 1.27-.42 1.44 1.23-.1 4.75-.28 6.3.5-.04.12-.6 1.12-.75 1.37 2.43.16 4.93 1.07 6.3 2.37-.22.2-1.15.88-1.28.98 2.04.9 5.03 2.93 6.1 4.4-.26.22-.98.8-1.22.97 1.35.77 4.05 3.45 4.84 4.95-.28.1-1.37.4-1.55.45 2.1 2.1 3.95 4.54 4.7 6.53-.4.07-1.42.2-1.7.26 1.97 2.04 3.5 5 4.5 7.3-2.5.06-5.83-.08-8.53-1 .08.27.38 1.26.48 1.64-2.1.17-5.1-.5-7.9-1.52.04.2.22 1.3.24 1.6-1.7-.08-5.27-1.4-6.54-2.3-.07.3-.28 1.2-.38 1.5-1.77-.33-4.87-2.2-6.55-3.65-.03.15-.26 1.3-.35 1.57-1.76-.7-3.64-2.58-4.8-4.72-.18.24-.85 1.17-.93 1.26-1.37-1.08-2.7-4.34-3.1-5.5-.14.1-.87.78-1.14.98-1.04-1.63-.57-5.34-.63-6.73-.45.07-1.15.37-1.4.43-.3-7.24 5.93-12.96 9.1-14.3z" clip-rule="evenodd" style="stroke-dasharray: 143, 145; stroke-dashoffset: 144;"></path><g fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10"><path d="M155.08 129.1l-2.1-1.35" style="stroke-dasharray: 3, 5; stroke-dashoffset: 4;"></path><path d="M149.18 125.33l-20.84-13.3" stroke-dasharray="4.4956,4.4956" style="stroke-dasharray: 25, 27; stroke-dashoffset: 26;"></path><path d="M126.44 110.83l-2.1-1.35" style="stroke-dasharray: 3, 5; stroke-dashoffset: 4;"></path></g></g><g fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10"><path d="M164.93 52.56c-1.22-1.06-4.73-2.63-19.88-3.96-16.24-1.42-18.77-.2-19.6.22-4.32 2.13-5.68 13.16-5.9 15.4-.22 2.97-.6 12.86 3.2 15.65.72.54 3 2.18 19.25 3.6 15.16 1.33 18.9.4 20.26-.43 3.73-2.24 4.9-11 5.23-14.66.24-2.96.8-12.88-2.57-15.82zM148.7 67.36l-8.4 5.1c-.65.4-1.5-.12-1.43-.92l1-11.56c.08-.78 1-1.16 1.58-.65l7.37 6.47c.5.43.42 1.22-.13 1.56z" style="stroke-dasharray: 184, 186; stroke-dashoffset: 185;"></path></g><g fill="none" stroke="#fff" stroke-width="2" stroke-miterlimit="10"><path transform="matrix(.987 -.163 .163 .987 -1.856 18.078)" d="M106.399,20.384A3.197,3.031 0,1,1 112.793,20.384A3.197,3.031 0,1,1 106.399,20.384" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path d="M110.08 23.47l1.75 10.64 3.7-.6M111.27 30.7l2.66-.45" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path></g><g><path fill="none" stroke="#fff" stroke-width="2" stroke-miterlimit="10" d="M56.95 88.48c-.22-.16-.78-.68-1.17-.9-.54 1.3-1.37 4.94-2.92 6.1-.18-.27-.63-1.15-.72-1.3-.8.94-3.15 3.55-4.8 4.1-.06-.1-.36-1.2-.44-1.5-1.84 1.6-4.25 2.74-6.14 2.8.02-.3.2-1.45.2-1.6-2.07.78-5.62 1.47-7.4 1.18.02-.33.13-1.24.17-1.54-1.5.4-5.3.42-6.93-.1.12-.25.68-1.24.78-1.4-2.98 0-6-.4-7.94-1.3.22-.3.84-1.14 1-1.38-2.84-.05-6-1.06-8.33-1.98 1.72-1.8 4.18-4.06 6.74-5.3-.26-.16-1.17-.65-1.5-.85 1.37-1.6 3.96-3.24 6.65-4.5-.17-.1-1.08-.76-1.3-.95 1.25-1.15 4.7-2.74 6.24-3-.17-.26-.65-1.04-.8-1.33 1.5-1.02 5-1.9 7.22-2.04-.1-.14-.72-1.1-.86-1.37 1.73-.74 4.4-.73 6.74-.05-.06-.3-.24-1.42-.25-1.54 1.73-.2 4.97 1.18 6.08 1.7.02-.17.06-1.16.1-1.5 1.9.42 4.2 3.37 5.23 4.3.27-.35.56-1.06.7-1.3 5.3 4.93 4.96 13.38 3.65 16.58z" clip-rule="evenodd" style="stroke-dasharray: 143, 145; stroke-dashoffset: 144;"></path><g fill="none" stroke="#fff" stroke-width="2" stroke-miterlimit="10"><path d="M26.67 86.2l2.44-.55" style="stroke-dasharray: 3, 5; stroke-dashoffset: 4;"></path><path d="M33.5 84.68l24.14-5.34" stroke-dasharray="4.4956,4.4956" style="stroke-dasharray: 25, 27; stroke-dashoffset: 26;"></path><path d="M59.84 78.85l2.44-.53" style="stroke-dasharray: 3, 5; stroke-dashoffset: 4;"></path></g></g><g fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10"><path d="M18.709999999999997,62.459A2.821,2.821 0,1,1 24.352,62.459A2.821,2.821 0,1,1 18.709999999999997,62.459" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path><path d="M69.197,36.715A2.821,2.821 0,1,1 74.839,36.715A2.821,2.821 0,1,1 69.197,36.715" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+Security
+</h3>
+<p class="dropdown--item_excerpt">
+The main Spring Security guides here at Baeldung.
+</p>
+</div>
+</a>
+</li>
+
+</ul>
+</div></li>
+<li class="nav--menu_item  menu-about"><a id="menu-item-6138" class="nav--menu_item_anchor nav--menu_item_withDropdown" href="javascript:void(0)">About&nbsp;<span class="menu--item_normal">▼</span><span class="menu--item_active">▲</span></a>
+<div class="nav--dropdown" style="display: none;">
+<ul class="nav--dropdown_content">
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/consulting" title="">
+<div class="dropdown--item_icon">
+<svg id="IcnAboutMarketingExperiments" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 190" enable-background="new 0 0 180 190"><g><g fill="none" stroke-width="2" stroke-miterlimit="10"><path stroke="#63B175" d="M80.56 9.02H175v9.45H80.56z" style="stroke-dasharray: 208, 210; stroke-dashoffset: 209;"></path><path stroke="#949598" d="M80.56 108.2V9H175v127.5h-9.48M80.56 18.47H175M90 30.7h37.78M99.44 36.7h66.12M108.9 42.7h47.2M90 57.7h37.78M99.44 63.7h66.12M108.9 69.7h47.2M90 84.7h37.78M99.44 90.7h66.12M108.9 96.7h47.2" style="stroke-dasharray: 879, 881; stroke-dashoffset: 880;"></path></g><g fill="none" stroke="#63B175" stroke-width="2" stroke-miterlimit="10"><path d="M31.12 117.7h9.44v9.45h-9.44zM16.95 117.7h9.45v9.45h-9.45zM45.3 117.7h9.43v9.45H45.3zM73.62 117.7h9.44v9.45h-9.44zM59.45 117.7h9.45v9.45h-9.45zM87.8 117.7h9.43v9.45H87.8zM101.66 117.7h9.44v9.45h-9.44zM31.12 146.04h9.44v9.44h-9.44zM16.95 146.04h9.45v9.44h-9.45zM45.3 146.04h9.43v9.44H45.3zM59.45 146.04h51.95v9.44H59.45zM115.83 146.04h9.44v9.44h-9.44zM130 146.04h9.44v9.44H130zM144.16 146.04h9.44v9.44h-9.44zM115.83 117.63h9.44v9.45h-9.44zM130 117.63h9.44v9.45H130zM144.16 117.63h9.44v9.45h-9.44zM23.9 131.88h9.43v9.44H23.9zM38.06 131.88h9.44v9.44h-9.44zM52.22 131.88h9.45v9.44h-9.45zM66.4 131.88h9.43v9.44H66.4zM80.56 131.88H90v9.44h-9.44zM94.72 131.88h9.45v9.44h-9.45zM108.9 131.88h9.43v9.44h-9.44zM123.06 131.88h9.44v9.44h-9.44zM137.22 131.88h9.45v9.44h-9.45zM55.3 164.93H165.5V108.2H5.04v56.73h44.12" style="stroke-dasharray: 1496, 1498; stroke-dashoffset: 1497;"></path></g><g fill="none" stroke="#63B175" stroke-width="2" stroke-miterlimit="10"><path d="M5,65.69A33.056,33.056 0,1,1 71.112,65.69A33.056,33.056 0,1,1 5,65.69" style="stroke-dasharray: 208, 210; stroke-dashoffset: 209;"></path><path d="M28.6 75.13l-9.43-9.44 9.44-9.45M47.5 56.25l9.44 9.44-9.44 9.43M42.78 56.24l-9.45 18.9" style="stroke-dasharray: 75, 77; stroke-dashoffset: 76;"></path></g><g><path fill="#535353" stroke="#949598" stroke-width="2" stroke-miterlimit="10" d="M40.92 172.84h3.94M45.85 168.53l-2.7-2.57v-1.35M45.85 177.05l-2.7 2.57v1.36M63.52 172.84h-3.94M58.6 168.53l2.76-2.57v-1.35M58.6 177.05l2.76 2.57v1.36" style="stroke-dasharray: 29, 31; stroke-dashoffset: 30;"></path><path fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10" d="M55.8 167.8c.27-1.17-.02-2.33-.72-3.2.58-1.25.16-3.62-1.84-3.62l-.58 1.54c-.47 0-.48 0-.94 0l-.58-1.54c-2 0-2.45 2.4-1.8 3.68-.7.86-.96 2-.7 3.13-1.36 1.16-2.22 2.98-2.22 5.02 0 3.53 2.6 6.4 5.8 6.4 3.2 0 5.8-2.87 5.8-6.4 0-2.04-.86-3.86-2.2-5.03z" style="stroke-dasharray: 52, 54; stroke-dashoffset: 53;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+Consulting
+</h3>
+<p class="dropdown--item_excerpt">
+My consulting engagements
+</p>
+</div>
+</a>
+</li>
+
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/full_archive" title="">
+<div class="dropdown--item_icon">
+<svg id="IcnAboutFullArchive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 190" enable-background="new 0 0 180 190"><g><g fill="#63B175" fill-rule="evenodd" clip-rule="evenodd"><path d="M98.27 72.5c-.54.9-1.47 1.43-2.55 1.43H84.3c-1.1 0-2.03-.52-2.57-1.42l-5.7-10.26c-.56-.9-.56-1.94 0-2.84l5.7-9.98c.54-.9 1.47-1.42 2.56-1.42H95.7c1.08 0 2 .52 2.55 1.42l5.7 9.98c.55.9.55 1.94 0 2.84l-5.7 10.27zM98.27 106.55c-.54.9-1.47 1.42-2.55 1.42H84.3c-1.1 0-2.03-.52-2.57-1.42l-5.7-10.28c-.56-.9-.56-1.94 0-2.84l5.7-9.98c.54-.9 1.47-1.42 2.56-1.42H95.7c1.08 0 2 .52 2.55 1.42l5.7 9.98c.55.9.55 1.94 0 2.84l-5.7 10.28zM69.58 90.34c-.54.9-1.47 1.42-2.55 1.42H55.6c-1.08 0-2-.52-2.55-1.42l-5.72-10.27c-.54-.9-.54-1.94 0-2.84l5.72-9.98c.54-.9 1.47-1.42 2.55-1.42h11.43c1.08 0 2 .52 2.55 1.42l5.72 9.98c.54.9.54 1.93 0 2.84l-5.72 10.27zM69.58 124.37c-.54.9-1.47 1.42-2.55 1.42H55.6c-1.08 0-2-.53-2.55-1.43l-5.72-10.27c-.54-.9-.54-1.94 0-2.84l5.72-9.98c.54-.9 1.47-1.42 2.55-1.42h11.43c1.08 0 2 .52 2.55 1.42l5.72 9.98c.54.9.54 1.94 0 2.84l-5.72 10.27zM126.96 90.34c-.54.9-1.47 1.42-2.56 1.42h-11.43c-1.08 0-2-.52-2.55-1.42l-5.7-10.27c-.56-.9-.56-1.94 0-2.84l5.7-9.98c.54-.9 1.47-1.42 2.55-1.42h11.43c1.1 0 2.02.52 2.56 1.42l5.7 9.98c.55.9.55 1.93 0 2.84l-5.7 10.27zM126.96 124.37c-.54.9-1.47 1.42-2.56 1.42h-11.43c-1.08 0-2-.53-2.55-1.43l-5.7-10.27c-.56-.9-.56-1.94 0-2.84l5.7-9.98c.54-.9 1.47-1.42 2.55-1.42h11.43c1.1 0 2.02.52 2.56 1.42l5.7 9.98c.55.9.55 1.94 0 2.84l-5.7 10.27zM98.27 140.58c-.54.9-1.47 1.42-2.55 1.42H84.3c-1.1 0-2.03-.52-2.57-1.42l-5.7-10.27c-.56-.9-.56-1.93 0-2.83l5.7-9.98c.54-.9 1.47-1.43 2.56-1.43H95.7c1.08 0 2 .52 2.55 1.42l5.7 9.97c.55.9.55 1.93 0 2.84l-5.7 10.28z" style="stroke-dasharray: 614, 616; stroke-dashoffset: 615;"></path></g><g fill="none" stroke="#949598" stroke-width="2" stroke-miterlimit="10"><path d="M81.63 10l1.24 12.6M97.13 167.4l1.24 12.6M5 103.37l12.6-1.24M162.4 87.87l12.6-1.24M23.98 40.82l9.78 8.02M146.24 141.16l9.78 8.02M35.82 161.02l8.02-9.78M136.16 38.76l8.02-9.78M49.74 19.67l5.96 11.16M124.3 159.17l5.96 11.16M14.67 135.26l11.16-5.96M154.17 60.7l11.16-5.96M8.27 70.2l12.1 3.68M159.63 116.12l12.1 3.67M65.2 176.73l3.68-12.1M111.12 25.38l3.67-12.1M98.37 10l-1.24 12.6M82.87 167.4L81.63 180M5 86.63l12.6 1.24M162.4 102.13l12.6 1.24M35.82 28.98l8.02 9.78M136.16 151.24l8.02 9.78M23.98 149.18l9.78-8.02M146.24 48.84l9.78-8.02M65.2 13.27l3.68 12.1M111.12 164.63l3.67 12.1M8.27 119.8l12.1-3.68M159.63 73.88l12.1-3.67M14.67 54.74l11.16 5.96M154.17 129.3l11.16 5.96M49.74 170.33l5.96-11.16M124.3 30.83l5.96-11.16" style="stroke-dasharray: 405, 407; stroke-dashoffset: 406;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+Full Archive
+</h3>
+<p class="dropdown--item_excerpt">
+The high level overview of all the articles on the site.
+</p>
+</div>
+</a>
+</li>
+
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/contribution-guidelines" title="">
+<div class="dropdown--item_icon">
+<svg id="IcnAboutWriteForBaeldung" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 190" enable-background="new 0 0 190 190"><g stroke-miterlimit="10"><g fill="none" stroke="#949598" stroke-width="2" stroke-dasharray="5,5"><path d="M90.39 105.3H12.94M94.5 105.3L41.14 60.2M94.5 105.3l38.7-54.86M94.5 105.3l.5-77.94M94.5 105.3h82.55M94.5 105.3l53.32 36.93M94.5 105.3l-60 22.57" style="stroke-dasharray: 504, 506; stroke-dashoffset: 505;"></path></g><g fill="none" stroke="#63B175" stroke-width="2"><path d="M98.54 121.2c7.1-1.8 12.36-8.23 12.36-15.9 0-9.05-7.35-16.4-16.4-16.4-9.07 0-16.42 7.35-16.42 16.4 0 7.65 5.23 14.06 12.3 15.88M120.13 137.65c9.52-7.56 15.64-19.24 15.64-32.34 0-22.8-18.48-41.27-41.28-41.27S53.2 82.5 53.2 105.3c0 15.4 8.43 28.8 20.92 35.9M98.54 114.73c3.65-1.57 6.2-5.2 6.2-9.42 0-5.66-4.6-10.25-10.25-10.25-5.68 0-10.27 4.6-10.27 10.26 0 4.2 2.53 7.82 6.15 9.4" style="stroke-dasharray: 362, 364; stroke-dashoffset: 363;"></path></g><path fill="#535353" stroke="#fff" stroke-width="2" d="M116.13 129.92c-1.3-.03-2.46.54-3.23 1.45-.3-1.98-2-3.5-4.05-3.5-1.26 0-2.38.57-3.13 1.45-.3-1.98-2-3.5-4.05-3.5-1.26 0-2.38.56-3.13 1.45V104.7c-.3-2.1-2.24-3.7-4.5-3.47-2.12.22-3.66 2.14-3.66 4.27v36.72c-3.34-2.5-7.48-4.03-11.96-4.1-2.23-.04-4.26 1.55-4.43 3.77-.2 2.42 1.7 4.43 4.08 4.43 6.78 0 12.3 9.1 12.3 15.9v6.62c0 1.1.9 2 2 2h25.75c1.1 0 2-.9 2-2v-34.63c0-2.26-1.74-4.24-4-4.3z" style="stroke-dasharray: 222, 224; stroke-dashoffset: 223;"></path><g fill="none" stroke="#63B175" stroke-width="2"><path d="M4.744,105.308A8.205,8.205 0,1,1 21.154,105.308A8.205,8.205 0,1,1 4.744,105.308" style="stroke-dasharray: 52, 54; stroke-dashoffset: 53;"></path><path d="M125.00000000000001,50.436A8.205,8.205 0,1,1 141.41000000000003,50.436A8.205,8.205 0,1,1 125.00000000000001,50.436" style="stroke-dasharray: 52, 54; stroke-dashoffset: 53;"></path><path d="M139.61599999999999,142.231A8.205,8.205 0,1,1 156.026,142.231A8.205,8.205 0,1,1 139.61599999999999,142.231" style="stroke-dasharray: 52, 54; stroke-dashoffset: 53;"></path><path d="M32.949000000000005,60.179A8.205,8.205 0,1,1 49.359,60.179A8.205,8.205 0,1,1 32.949000000000005,60.179" style="stroke-dasharray: 52, 54; stroke-dashoffset: 53;"></path><path d="M86.795,27.359A8.205,8.205 0,1,1 103.205,27.359A8.205,8.205 0,1,1 86.795,27.359" style="stroke-dasharray: 52, 54; stroke-dashoffset: 53;"></path><path d="M26.282000000000004,127.872A8.205,8.205 0,1,1 42.692,127.872A8.205,8.205 0,1,1 26.282000000000004,127.872" style="stroke-dasharray: 52, 54; stroke-dashoffset: 53;"></path><path d="M49.870999999999995,142.231A4.103,4.103 0,1,1 58.077,142.231A4.103,4.103 0,1,1 49.870999999999995,142.231" style="stroke-dasharray: 26, 28; stroke-dashoffset: 27;"></path><path d="M132.949,154.538A3.077,3.077 0,1,1 139.103,154.538A3.077,3.077 0,1,1 132.949,154.538" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path></g><g fill="none" stroke="#fff"><path d="M168.84599999999998,105.308A8.205,8.205 0,1,1 185.256,105.308A8.205,8.205 0,1,1 168.84599999999998,105.308" style="stroke-dasharray: 52, 54; stroke-dashoffset: 53;"></path><path d="M140.128,68.385A4.103,4.103 0,1,1 148.334,68.385A4.103,4.103 0,1,1 140.128,68.385" style="stroke-dasharray: 26, 28; stroke-dashoffset: 27;"></path><path d="M59.033,35.564A3.077,3.077 0,1,1 65.187,35.564A3.077,3.077 0,1,1 59.033,35.564" style="stroke-dasharray: 20, 22; stroke-dashoffset: 21;"></path><path d="M68.94800000000001,155.821A2.821,2.821 0,1,1 74.59,155.821A2.821,2.821 0,1,1 68.94800000000001,155.821" style="stroke-dasharray: 18, 20; stroke-dashoffset: 19;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+Write For Baeldung
+</h3>
+<p class="dropdown--item_excerpt">
+Become a writer on the site.
+</p>
+</div>
+</a>
+</li>
+
+<li class="nav--dropdown_item">
+<a class="dropdown--item_anchor transition--background" href="http://www.baeldung.com/about/" title="">
+<div class="dropdown--item_icon">
+<svg id="IcnAboutBaeldung" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 190" enable-background="new 0 0 180 190"><g><path fill="#63B175" fill-rule="evenodd" d="M111.14 117.57c-12 12.93-26.2 9.02-31.44 7.37 27.4-14.16 32.34-43 32.34-43s-22.94 37.5-54.18 43.3c-2.47.46-4.28-5.52-1.34-6.17 8.76-1.95 15.83-5.76 15.83-5.76-1.28-8.1-1.9-21.78 6.73-29.56 11.44-10.33 30.78-4.9 44.03-20.32 3.1-3.6 4.3 36.63-11.96 54.15z" clip-rule="evenodd" style="stroke-dasharray: 326, 328; stroke-dashoffset: 327;"></path><g fill="none" stroke="#fff" stroke-width="2" stroke-miterlimit="10"><path d="M81.63 10l1.24 12.6M97.13 167.4l1.24 12.6M5 103.37l12.6-1.24M162.4 87.87l12.6-1.24M23.98 40.82l9.78 8.02M146.24 141.16l9.78 8.02M35.82 161.02l8.02-9.78M136.16 38.76l8.02-9.78M49.74 19.67l5.96 11.16M124.3 159.17l5.96 11.16M14.67 135.26l11.16-5.96M154.17 60.7l11.16-5.96M8.27 70.2l12.1 3.68M159.63 116.12l12.1 3.67M65.2 176.73l3.68-12.1M111.12 25.38l3.67-12.1M98.37 10l-1.24 12.6M82.87 167.4L81.63 180M5 86.63l12.6 1.24M162.4 102.13l12.6 1.24M35.82 28.98l8.02 9.78M136.16 151.24l8.02 9.78M23.98 149.18l9.78-8.02M146.24 48.84l9.78-8.02M65.2 13.27l3.68 12.1M111.12 164.63l3.67 12.1M8.27 119.8l12.1-3.68M159.63 73.88l12.1-3.67M14.67 54.74l11.16 5.96M154.17 129.3l11.16 5.96M49.74 170.33l5.96-11.16M124.3 30.83l5.96-11.16" style="stroke-dasharray: 405, 407; stroke-dashoffset: 406;"></path></g></g></svg>
+</div>
+<div class="dropdown--item_text">
+<h3 class="dropdown--item_title">
+About Baeldung
+</h3>
+<p class="dropdown--item_excerpt">
+About Baeldung.
+</p>
+</div>
+</a>
+</li>
+
+</ul>
+</div></li>
+<li class="nav--menu_item  menu-rss"><a id="menu-item-18864" class="nav--menu_item_anchor" href="http://www.baeldung.com/feed"><svg id="IcnRSS" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" enable-background="new 0 0 35 35"><path fill="none" stroke="#fff" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(.707 -.707 .707 .707 -16.677 13.594)" d="M4.5,26.928A3.571,3.572 0,1,1 11.642,26.928A3.571,3.572 0,1,1 4.5,26.928" style="stroke-dasharray: 23, 25; stroke-dashoffset: 0;"></path><path fill="none" stroke="#fff" stroke-width="2" stroke-miterlimit="10" d="M22.48 32.5c.48-11.35-8.65-20.46-19.98-19.98M32.48 32.5C33.02 15.58 19.43 1.98 2.5 2.52" stroke-linecap="square" stroke-linejoin="bevel" style="stroke-dasharray: 80, 82; stroke-dashoffset: 0;"></path></svg></a></li>
+</ul>
+</div>
+</nav>
+
+<div class="container">
+<div id="content" class="clearfix row">
+<div id="main" class="col-sm-8 clearfix" role="main">
+<article id="post-17111" class="clearfix post-17111 post type-post status-publish format-standard has-post-thumbnail hentry category-persistence" role="article" itemscope="" itemtype="http://schema.org/BlogPosting">
+<meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://google.com/article">
+<meta itemprop="datePublished" content="February 8, 2017">
+<meta itemprop="dateModified" content="February 8, 2017">
+<header>
+
+<div class="page-header"><h1 class="single-title entry-title" itemprop="headline">Hibernate One to Many Annotation Tutorial</h1>
+<p class="post-modified">Last modified: <span class="updated">February 8, 2017</span></p>
+<div class="meta-row">
+<div class="author vcard" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+<span class="author-by"> by </span>
+<span class="author-name fn" itemprop="name">
+<a href="http://www.baeldung.com/author/baeldung/" title="Posts by baeldung" rel="author">baeldung</a> </span>
+</div>
+<span itemprop="image" itemscope="" itemtype="https://schema.org/ImageObject">
+<meta itemprop="url" content="http://www.baeldung.com/wp-content/uploads/2016/10/social-Persistence-On-Baeldung-1.jpg">
+<meta itemprop="width" content="208">
+<meta itemprop="height" content="208">
+</span>
+<span itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
+<span itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject">
+<meta itemprop="url" content="http://www.baeldung.com/wp-content/uploads/2016/10/social-Persistence-On-Baeldung-1.jpg">
+<meta itemprop="width" content="208">
+<meta itemprop="height" content="208">
+</span>
+<meta itemprop="name" content="Baeldung">
+</span>
+<ul class="categories">
+<li><a href="http://www.baeldung.com/category/persistence/" rel="category tag">Persistence</a></li> </ul>
+</div>
+</div>
+</header> 
+<section class="post_content clearfix" itemprop="articleBody">
+<div class="wwsgd" style=""></div><p class="lead"><span style="font-weight: 400;"></span></p><div class="short_box short_start">
+<h3><b>The Price of all “Learn Spring Security” course packages will permanently increase<strong> by $50 on Friday:</strong></b></h3>
+<p><strong><a href="http://www.baeldung.com/learn-spring-security-course#table">&gt;&gt;&gt; GET ACCESS NOW</a></strong></p>
+</div><p></p>
+<h2><strong>1. Introduction</strong></h2>
+<p>This quick Hibernate tutorial will take you through an example of&nbsp;<em>one-to-many</em>&nbsp;mapping using JPA annotations – an alternative to the&nbsp;<em>XML</em>&nbsp;descriptor approach.</p>
+<p>In simple terms,&nbsp;<em>one-to-many</em>&nbsp;mapping means that one row in a table is&nbsp;mapped to multiple rows in another table.</p>
+<h2><strong>2. Description</strong></h2>
+<p>Let’s look at the following entity relationship diagram to see<em>&nbsp;one-to-many</em>&nbsp;association:</p>
+<a href="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/C-1.png"><img class="alignnone size-full wp-image-17112" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/C-1.png" alt="" srcset="http://www.baeldung.com/wp-content/uploads/2017/02/C-1.png 478w, http://www.baeldung.com/wp-content/uploads/2017/02/C-1-300x110.png 300w" sizes="(max-width: 478px) 100vw, 478px"></a>
+<p>For this example, we will implement a&nbsp;<em>Cart</em>&nbsp;system, where we have a table for&nbsp;<em>Cart</em>&nbsp;and another table for&nbsp;<em>Items</em>. A C<em>art</em>&nbsp;can have multiple items, so here we have a&nbsp;<em>one-to-many</em>&nbsp;mapping with&nbsp;<em>cart_id</em>&nbsp;as a primary key in the&nbsp;<em>Cart</em>&nbsp;table and this association is constrained by the foreign key in the&nbsp;<em>Items</em>&nbsp;table.</p>
+<p>The code snippet below shows the implementation of a&nbsp;<em>@OneToMany</em>&nbsp;mapping of&nbsp;<em>Cart</em>&nbsp;class to the&nbsp;<em>ItemEntry</em>&nbsp;object, simply put, it means that a single&nbsp;<em>Cart</em>&nbsp;object can be associated with multiple&nbsp;<em>ItemEntry</em>&nbsp;objects:</p>
+<div><div id="highlighter_295107" class="syntaxhighlighter notranslate java"><div class="toolbar"><span><a href="http://www.baeldung.com/hibernate-one-to-many#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">public</code> <code class="java keyword">class</code> <code class="java plain">Cart {</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">//...&nbsp;&nbsp;&nbsp;&nbsp; </code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java color1">@OneToMany</code><code class="java plain">(mappedBy=</code><code class="java string">"cart"</code><code class="java plain">)</code></div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">private</code> <code class="java plain">Set&lt;ItemEntry&gt; items;</code></div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">//...</code></div><div class="line number9 index8 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>This bidirectional relationship between objects means that we are able to access Object A from Object B, and Object B from Object A.&nbsp;The&nbsp;<em>mappedBy</em>&nbsp;property is what we use to tell Hibernate which variable we are using to represent the parent class in our child class.</p>
+<p>The following technologies and libraries are used in order to develop a sample Hibernate application that implements&nbsp;<em>one-to-many</em>&nbsp;association:</p>
+<ul>
+<li><em>JDK</em>&nbsp;1.8 or later</li>
+<li><em>Hibernate</em>&nbsp;4 or later</li>
+<li><em>Maven</em>&nbsp;3 or later</li>
+<li><em>MySQL</em>&nbsp;Server 5.6 or later</li>
+</ul>
+<h2><strong>3. Setup</strong></h2>
+<h3><strong>3.1. Database Setup</strong></h3>
+<p>Below is our database script for&nbsp;<em>Cart</em>&nbsp;and<em>&nbsp;Items</em>&nbsp;tables.&nbsp;We use the foreign key constraint for&nbsp;<em>one-to-many</em>&nbsp;mapping:</p>
+<div><div id="highlighter_701520" class="syntaxhighlighter nogutter notranslate sql"><div class="toolbar"><span><a href="http://www.baeldung.com/hibernate-one-to-many#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="sql keyword">CREATE</code> <code class="sql keyword">TABLE</code> <code class="sql plain">`Cart` (</code></div><div class="line number2 index1 alt1"><code class="sql spaces">&nbsp;&nbsp;</code><code class="sql plain">`cart_id` </code><code class="sql keyword">int</code><code class="sql plain">(11) unsigned </code><code class="sql color1">NOT</code> <code class="sql color1">NULL</code> <code class="sql plain">AUTO_INCREMENT,</code></div><div class="line number3 index2 alt2"><code class="sql spaces">&nbsp;&nbsp;</code><code class="sql keyword">PRIMARY</code> <code class="sql keyword">KEY</code> <code class="sql plain">(`cart_id`)</code></div><div class="line number4 index3 alt1"><code class="sql plain">) ENGINE=InnoDB AUTO_INCREMENT=5 </code><code class="sql keyword">DEFAULT</code> <code class="sql plain">CHARSET=utf8;</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="sql keyword">CREATE</code> <code class="sql keyword">TABLE</code> <code class="sql plain">`Items` (</code></div><div class="line number7 index6 alt2"><code class="sql spaces">&nbsp;&nbsp;</code><code class="sql plain">`id` </code><code class="sql keyword">int</code><code class="sql plain">(11) unsigned </code><code class="sql color1">NOT</code> <code class="sql color1">NULL</code> <code class="sql plain">AUTO_INCREMENT,</code></div><div class="line number8 index7 alt1"><code class="sql spaces">&nbsp;&nbsp;</code><code class="sql plain">`cart_id` </code><code class="sql keyword">int</code><code class="sql plain">(11) unsigned </code><code class="sql color1">NOT</code> <code class="sql color1">NULL</code><code class="sql plain">,</code></div><div class="line number9 index8 alt2"><code class="sql spaces">&nbsp;&nbsp;</code><code class="sql keyword">PRIMARY</code> <code class="sql keyword">KEY</code> <code class="sql plain">(`id`),</code></div><div class="line number10 index9 alt1"><code class="sql spaces">&nbsp;&nbsp;</code><code class="sql keyword">KEY</code> <code class="sql plain">`cart_id` (`cart_id`),</code></div><div class="line number11 index10 alt2"><code class="sql spaces">&nbsp;&nbsp;</code><code class="sql keyword">CONSTRAINT</code> <code class="sql plain">`items_ibfk_1` </code><code class="sql keyword">FOREIGN</code> <code class="sql keyword">KEY</code> <code class="sql plain">(`cart_id`) </code><code class="sql keyword">REFERENCES</code> <code class="sql plain">`Cart` (`cart_id`)</code></div><div class="line number12 index11 alt1"><code class="sql plain">) ENGINE=InnoDB AUTO_INCREMENT=7 </code><code class="sql keyword">DEFAULT</code> <code class="sql plain">CHARSET=utf8;</code></div></div></td></tr></tbody></table></div></div>
+<p>Our database setup is ready, let’s move on to creating the Hibernate example project.</p>
+<h3><strong>3.2. Maven Dependencies</strong></h3>
+<p>We will then add the Hibernate and MySQL driver dependencies to our&nbsp;<em>pom.xml</em>&nbsp;file.The Hibernate dependency uses JBoss logging and it automatically gets added as transitive dependencies:</p>
+<ul>
+<li class="brush: xml; gutter: false">Hibernate version 5<em>.2.7.Final</em></li>
+<li class="brush: xml; gutter: false">MySQL driver version&nbsp;<em>6.0.5</em></li>
+</ul>
+<p>Please visit the Maven central repository for the latest versions of&nbsp;<a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22hibernate-core%22">Hibernate</a>&nbsp;and the&nbsp;<a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22mysql-connector-java%22">MySQL</a>&nbsp;dependencies.</p>
+<h3><strong>3.3. Hibernate Configuration</strong></h3>
+<p>Here is the configuration of Hibernate:</p>
+<div><div id="highlighter_488254" class="syntaxhighlighter nogutter notranslate xml"><div class="toolbar"><span><a href="http://www.baeldung.com/hibernate-one-to-many#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">hibernate-configuration</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">session-factory</code><code class="xml plain">&gt;</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">property</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"hibernate.connection.driver_class"</code><code class="xml plain">&gt;com.mysql.jdbc.Driver&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">property</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"hibernate.connection.password"</code><code class="xml plain">&gt;root&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">property</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"hibernate.connection.url"</code><code class="xml plain">&gt;jdbc:<a href="mysql://localhost:3306/setup">mysql://localhost:3306/setup</a>&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">property</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"hibernate.connection.username"</code><code class="xml plain">&gt;root&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">property</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"hibernate.dialect"</code><code class="xml plain">&gt;org.hibernate.dialect.MySQLDialect&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">property</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"hibernate.current_session_context_class"</code><code class="xml plain">&gt;thread&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">property</code> <code class="xml color1">name</code><code class="xml plain">=</code><code class="xml string">"hibernate.show_sql"</code><code class="xml plain">&gt;true&lt;/</code><code class="xml keyword">property</code><code class="xml plain">&gt;</code></div><div class="line number10 index9 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">session-factory</code><code class="xml plain">&gt;</code></div><div class="line number11 index10 alt2"><code class="xml plain">&lt;/</code><code class="xml keyword">hibernate-configuration</code><code class="xml plain">&gt;</code></div></div></td></tr></tbody></table></div></div>
+<h3><strong>3.4.&nbsp;<em>HibernateAnnotationUtil</em>&nbsp;Class</strong></h3>
+<p>With the&nbsp;<i>HibernateAnnotationUtil</i>&nbsp;class, we just need to reference the new Hibernate configuration file:</p>
+<div><div id="highlighter_933691" class="syntaxhighlighter notranslate java"><div class="toolbar"><span><a href="http://www.baeldung.com/hibernate-one-to-many#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">private</code> <code class="java keyword">static</code> <code class="java plain">SessionFactory sessionFactory;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="java keyword">private</code> <code class="java plain">SessionFactory buildSessionFactory() {</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">Configuration configuration = </code><code class="java keyword">new</code> <code class="java plain">Configuration();</code></div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">configuration.configure(</code><code class="java string">"hibernate-annotation.cfg.xml"</code><code class="java plain">);</code></div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">System.out.println(</code><code class="java string">"Hibernate Annotation Configuration loaded"</code><code class="java plain">);</code></div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number9 index8 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">ServiceRegistry serviceRegistry = </code><code class="java keyword">new</code> <code class="java plain">StandardServiceRegistryBuilder()</code></div><div class="line number10 index9 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">.applySettings(configuration.getProperties()).build();</code></div><div class="line number11 index10 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">System.out.println(</code><code class="java string">"Hibernate Annotation serviceRegistry created"</code><code class="java plain">);</code></div><div class="line number12 index11 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number13 index12 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);</code></div><div class="line number14 index13 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number15 index14 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">return</code> <code class="java plain">sessionFactory;</code></div><div class="line number16 index15 alt1"><code class="java plain">}&nbsp;&nbsp; </code></div><div class="line number17 index16 alt2">&nbsp;</div><div class="line number18 index17 alt1"><code class="java keyword">public</code> <code class="java plain">SessionFactory getSessionFactory() {</code></div><div class="line number19 index18 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">if</code><code class="java plain">(sessionFactory == </code><code class="java keyword">null</code><code class="java plain">) sessionFactory = buildSessionFactory();</code></div><div class="line number20 index19 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">return</code> <code class="java plain">sessionFactory;</code></div><div class="line number21 index20 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<h2><strong>4. The Models</strong></h2>
+<p>The mapping related configurations will be done using JPA annotations in the model classes:</p>
+<div><div id="highlighter_578516" class="syntaxhighlighter nogutter notranslate java"><div class="toolbar"><span><a href="http://www.baeldung.com/hibernate-one-to-many#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java color1">@Entity</code></div><div class="line number2 index1 alt1"><code class="java color1">@Table</code><code class="java plain">(name=</code><code class="java string">"CART"</code><code class="java plain">)</code></div><div class="line number3 index2 alt2"><code class="java keyword">public</code> <code class="java keyword">class</code> <code class="java plain">Cart {</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">//...</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java color1">@OneToMany</code><code class="java plain">(mappedBy=</code><code class="java string">"cart"</code><code class="java plain">)</code></div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">private</code> <code class="java plain">Set&lt;ItemEntry&gt; items;</code></div><div class="line number9 index8 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number10 index9 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">// getters and setters</code></div><div class="line number11 index10 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>Please note that&nbsp;the&nbsp;<em>@OneToMany</em>&nbsp;annotation is used to define the property in&nbsp;<em>Items</em>&nbsp;class that will be used to map the&nbsp;<em>mappedBy</em>&nbsp;variable. That’s why we have a property named “<em>cart</em>” in the&nbsp;<em>Items</em>&nbsp;class:</p>
+<div><div id="highlighter_172982" class="syntaxhighlighter notranslate java"><div class="toolbar"><span><a href="http://www.baeldung.com/hibernate-one-to-many#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java color1">@Entity</code></div><div class="line number2 index1 alt1"><code class="java color1">@Table</code><code class="java plain">(name=</code><code class="java string">"ITEMS"</code><code class="java plain">)</code></div><div class="line number3 index2 alt2"><code class="java keyword">public</code> <code class="java keyword">class</code> <code class="java plain">ItemEntry {</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">//...</code></div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java color1">@ManyToOne</code></div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java color1">@JoinColumn</code><code class="java plain">(name=</code><code class="java string">"cart_id"</code><code class="java plain">, nullable=</code><code class="java keyword">false</code><code class="java plain">)</code></div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">private</code> <code class="java plain">Cart cart;</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">public</code> <code class="java plain">ItemEntry() {}</code></div><div class="line number11 index10 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number12 index11 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java comments">// getters and setters</code></div><div class="line number13 index12 alt2"><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>It is importing to note&nbsp;that the&nbsp;<em>@ManyToOne</em>&nbsp;annotation is&nbsp;associated with&nbsp;<em>Cart</em>&nbsp;class variable.&nbsp;<em>@JoinColumn</em>&nbsp;annotation references the mapped column.</p>
+<h2><strong>5. In Action</strong></h2>
+<p>In the test program, we are creating a class with a&nbsp;<em>main</em>() method for getting the Hibernate Session and saving the model objects into the database implementing the&nbsp;<em>one-to-many</em>&nbsp;association:</p>
+<div><div id="highlighter_961016" class="syntaxhighlighter notranslate java"><div class="toolbar"><span><a href="http://www.baeldung.com/hibernate-one-to-many#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java plain">sessionFactory = HibernateAnnotationUtil.getSessionFactory();</code></div><div class="line number2 index1 alt1"><code class="java plain">session = sessionFactory.getCurrentSession();</code></div><div class="line number3 index2 alt2"><code class="java plain">System.out.println(</code><code class="java string">"Session created"</code><code class="java plain">);</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="java plain">tx = session.beginTransaction();</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="java plain">session.save(cart);</code></div><div class="line number8 index7 alt1"><code class="java plain">session.save(item1);</code></div><div class="line number9 index8 alt2"><code class="java plain">session.save(item2);</code></div><div class="line number10 index9 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number11 index10 alt2"><code class="java plain">tx.commit();</code></div><div class="line number12 index11 alt1"><code class="java plain">System.out.println(</code><code class="java string">"Cart ID="</code> <code class="java plain">+ cart.getId());</code></div><div class="line number13 index12 alt2"><code class="java plain">System.out.println(</code><code class="java string">"item1 ID="</code> <code class="java plain">+ item1.getId()</code></div><div class="line number14 index13 alt1"><code class="java spaces">&nbsp;&nbsp;</code><code class="java plain">+ </code><code class="java string">", Foreign Key Cart ID="</code> <code class="java plain">+ item.getCart().getId());</code></div><div class="line number15 index14 alt2"><code class="java plain">System.out.println(</code><code class="java string">"item2 ID="</code> <code class="java plain">+ item2.getId()</code></div><div class="line number16 index15 alt1"><code class="java plain">+ </code><code class="java string">", Foreign Key Cart ID="</code> <code class="java plain">+ item.getCart().getId());</code></div></div></td></tr></tbody></table></div></div>
+<p>This is the&nbsp;output of our test program:</p>
+<div><div id="highlighter_219501" class="syntaxhighlighter nogutter notranslate bash"><div class="toolbar"><span><a href="http://www.baeldung.com/hibernate-one-to-many#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="bash plain">Session created</code></div><div class="line number2 index1 alt1"><code class="bash plain">Hibernate: insert into CART values ()</code></div><div class="line number3 index2 alt2"><code class="bash plain">Hibernate: insert into ITEMS (cart_id)</code></div><div class="line number4 index3 alt1"><code class="bash spaces">&nbsp;&nbsp;</code><code class="bash plain">values (?)</code></div><div class="line number5 index4 alt2"><code class="bash plain">Hibernate: insert into ITEMS (cart_id)</code></div><div class="line number6 index5 alt1"><code class="bash spaces">&nbsp;&nbsp;</code><code class="bash plain">values (?)</code></div><div class="line number7 index6 alt2"><code class="bash plain">Cart ID=7</code></div><div class="line number8 index7 alt1"><code class="bash plain">item1 ID=11, Foreign Key Cart ID=7</code></div><div class="line number9 index8 alt2"><code class="bash plain">item2 ID=12, Foreign Key Cart ID=7</code></div><div class="line number10 index9 alt1"><code class="bash plain">Closing SessionFactory</code></div></div></td></tr></tbody></table></div></div>
+<h2><strong>6. Conclusion</strong></h2>
+<p>We have seen how easy it is to implement the&nbsp;<em>one-to-many</em>&nbsp;relationship with the Hibernate ORM and MySQL database using JPA annotations.</p>
+<p>The source code of&nbsp;this tutorial&nbsp;can be found&nbsp;<a href="https://github.com/eugenp/tutorials/tree/master/spring-hibernate4">over on GitHub</a>.</p>
+<div class="short_box short_end">
+<h3>The Price of all “Learn Spring Security” course packages will permanently increase<strong> by $50 on Friday:</strong></h3>
+<p><strong><a href="http://www.baeldung.com/learn-spring-security-course#table">&gt;&gt;&gt; GET ACCESS NOW</a></strong></p>
+</div>
+<span id="tho-end-content" style="display: block; visibility: hidden;"></span><span id="tve_leads_end_content" style="display: block; visibility: hidden; border: 1px solid transparent;"></span>
+</section> 
+ 
+</article> 
+<div class="wpdiscuz_top_clearing"></div>
+<div id="comments" class="comments-area">
+<div id="respond" style="width: 0;height: 0;clear: both;margin: 0;padding: 0;"></div>
+<div id="wpcomm" class="wpdiscuz_unauth" style="border:none;">
+<div class="wpdiscuz-front-actions">
+<div class="wpdiscuz-sort-buttons" style="font-size:14px;">Sort by: &nbsp;
+<span class="wpdiscuz-sort-button wpdiscuz-date-sort-desc">newest</span> |
+<span class="wpdiscuz-sort-button wpdiscuz-date-sort-asc wpdiscuz-sort-button-active">oldest</span>
+| <span class="wpdiscuz-sort-button wpdiscuz-vote-sort-up">most voted</span>
+</div>
+</div>
+<div id="wcThreadWrapper" class="wc-thread-wrapper">
+<div id="wc-comm-11355_0" class="wc-comment wc-blog-guest wc_comment_level-1"><div class="wc-comment-left "><img alt="Sagar Kalburgi" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/b0284f0f09f388176f23070bdcc19b98" srcset="http://2.gravatar.com/avatar/b0284f0f09f388176f23070bdcc19b98?s=128&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="wc-blog-guest wc-comment-label"><span>Guest</span></div></div><div id="comment-11355" class="wc-comment-right "><div class="wc-comment-header"><div class="wc-comment-author ">Sagar Kalburgi</div><div class="wc-comment-link"><i class="fa fa-share-alt wc-share-link wpf-cta" aria-hidden="true" title="Share"></i><span class="share_buttons_box"><a class="wc_tw" target="_blank" href="https://twitter.com/intent/tweet?text=Thanks+for+writing+this+blog%21+It+was+helpful%0A...+&amp;url=http%3A%2F%2Fwww.baeldung.com%2Fhibernate-one-to-many%2F%23comment-11355" title=""><i class="fa fa-twitter wpf-cta" aria-hidden="true"></i><span>Share On Twitter</span></a><a class="wc_go" target="_blank" href="https://plus.google.com/share?url=http://www.baeldung.com/hibernate-one-to-many" title=""><i class="fa fa-google wpf-cta" aria-hidden="true"></i><span>Share On Google</span></a></span><span class="wc-comment-img-link-wrap"><i class="fa fa-link wc-comment-img-link wpf-cta" aria-hidden="true"></i><span><input type="text" class="wc-comment-link-input" value="http://www.baeldung.com/hibernate-one-to-many/#comment-11355"></span></span></div><div class="wpdiscuz_clear"></div></div><div class="wc-comment-text"><p>Thanks for writing this blog! It was helpful</p>
+</div><div class="wc-comment-footer"><div class="wc-footer-left"><span class="wc-vote-link wc-up  wc_vote wc_not_clicked"><i class="fa fa-thumbs-up fa-flip-horizontal wc-vote-img-up"></i><span>Vote Up</span></span><span class="wc-vote-result">3</span><span class="wc-vote-link wc-down  wc_vote wc_not_clicked"><i class="fa fa-thumbs-down wc-vote-img-down"></i><span>Vote Down</span></span>&nbsp;</div><div class="wc-footer-right"><div class="wc-comment-date"><i class="fa fa-clock-o" aria-hidden="true"></i>6 months 21 days ago</div><div class="wc-toggle wpdiscuz-hidden"><i class="fa fa-chevron-up" aria-hidden="true" title="Hide Replies"></i></div></div><div class="wpdiscuz_clear"></div></div></div><div class="wpdiscuz-comment-message"></div><div id="wpdiscuz_form_anchor-11355_0" style="clear:both"></div></div>
+<div class="wpdiscuz-comment-pagination">
+</div>
+</div>
+<div class="wpdiscuz_clear"></div>
+</div>
+</div>
+<div class="wpdiscuz-loading-bar wpdiscuz-loading-bar-unauth"><img class="wpdiscuz-loading-bar-img" alt="wpDiscuz" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/loading.gif" width="32" height="25"></div>
+</div> 
+<div id="sidebar1" class="col-sm-4 q2w3-fixed-widget-container" role="complementary" style="height: 606px;">
+<div id="text-2_clone" class="widget widget_text q2w3-widget-clone-sidebar1" style="top: 50px; width: 334px; height: 26px; visibility: hidden;"> 
+</div><div id="text-2" class="widget widget_text" style="top: 50px; width: 334px; position: fixed;"> <div class="textwidget"><div id="bsap_1307383" class="bsap bsap_1307383" data-serve="CKYDC2JL">
+<div class="bsa_it one"><!-- no ad --><span class="bsa_it_p">
+<a href="http://www.buysellads.com/buy/detail/282594/zone/1307383?utm_source=site_282594&amp;utm_medium=website&amp;utm_campaign=imagetext&amp;utm_content=zone_1307383">ads by BSA</a>
+</span>
+</div>
+
+<script type="text/javascript" id="auto_1" class="ignoreme"> if (typeof(BSACallback) !== 'undefined') BSACallback(); </script></div>
+</div>
+</div><div id="widget_thrive_leads-4_clone" class="widget widget_thrive_leads q2w3-widget-clone-sidebar1" style="top: 96px; width: 366px; height: 485px; visibility: hidden;"></div><div id="widget_thrive_leads-4" class="widget widget_thrive_leads" style="top: 96px; width: 366px; position: fixed;"><div class="tve-leads-widget tve-leads-track-widget-407 tve-tl-anim tl-anim-instant tve-leads-triggered"><div class="tl-style" id="tve_two_set" data-state="407"><style type="text/css" class="tve_custom_style">@media (min-width: 300px){[data-css="tve-u-15fda7c7c56"] { background-color: rgb(255, 255, 255) !important; margin-top: 50px !important; margin-right: 0px !important; }[data-css="tve-u-15fca5ba31b"] { float: none; width: 330px; }}</style><div class="tve-leads-conversion-object" data-tl-type="widget"><div class="tve_flt"><div id="tve_editor" class="tve_shortcode_editor"><div class="thrv-leads-widget thrv_wrapper tve_editor_main_content tve_two_set_v3 tve_brdr_solid tve_empty_dropzone tve_dragged_over" style="padding: 0px !important; margin-left: 0px !important; margin-right: 15px !important;" data-css="tve-u-15fda7c7c56">
+<div style="width: 340px; margin-left: 0px; margin-right: 0px !important; margin-top: 0px !important;" class="thrv_wrapper tve_image_caption" data-css="tve-u-15fca5ba31b"><span class="tve_image_frame"><a href="http://www.baeldung.com/learn-spring-security-course#master-class" class="" rel="nofollow" data-tcb-events=""><img class="tve_image wp-image-26795" alt="" style="width: 340px; padding-left: 0px !important;" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/LSS-Widget-B.png" width="330" height="471" data-attachment-id="20375" title="LSS-Widget-B" data-id="26795"></a></span></div>
+</div></div></div></div></div></div></div>
+</div>
+</div> 
+</div> 
+<footer role="contentinfo">
+<div id="inner-footer" class="clearfix">
+<div id="widget-footer" class="clearfix row">
+<div class="col-md-3 hidden-xs">
+<img src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/logo.byline.svg" id="footer-logo" class="img-responsive" alt="Baeldung Logo">
+</div>
+<div class="col-md-9 col-xs-12">
+<div id="nav_menu-5" class="widget col-sm-4 widget_nav_menu"><h4 class="widgettitle">Categories</h4><ul id="menu-categories" class="menu"><li class="menu-spring"><a href="http://www.baeldung.com/category/spring/">Spring</a></li>
+<li class="menu-rest"><a href="http://www.baeldung.com/category/rest/">REST</a></li>
+<li class="menu-java"><a href="http://www.baeldung.com/category/java/">Java</a></li>
+<li class="menu-security"><a href="http://www.baeldung.com/category/security-2/">Security</a></li>
+<li class="current-post-ancestor active current-post-parent menu-persistence"><a href="http://www.baeldung.com/category/persistence/">Persistence</a></li>
+<li class="menu-jackson"><a href="http://www.baeldung.com/category/jackson/">Jackson</a></li>
+<li class="menu-httpclient"><a href="http://www.baeldung.com/category/http/">HttpClient</a></li>
+</ul></div>
+<div id="nav_menu-3" class="widget col-sm-4 widget_nav_menu"><h4 class="widgettitle">Series</h4><ul id="menu-series" class="menu"><li class="menu-java-back-to-basics-tutorial"><a href="http://www.baeldung.com/java-tutorial">Java “Back to Basics” Tutorial</a></li>
+<li class="menu-jackson-json-tutorial"><a href="http://www.baeldung.com/jackson">Jackson JSON Tutorial</a></li>
+<li class="menu-httpclient-4-tutorial"><a href="http://www.baeldung.com/httpclient-guide">HttpClient 4 Tutorial</a></li>
+<li class="menu-rest-with-spring-tutorial"><a href="http://www.baeldung.com/rest-with-spring-series/">REST with Spring Tutorial</a></li>
+<li class="menu-spring-persistence-tutorial"><a href="http://www.baeldung.com/persistence-with-spring-series/">Spring Persistence Tutorial</a></li>
+<li class="menu-security-with-spring"><a href="http://www.baeldung.com/security-spring">Security with Spring</a></li>
+</ul></div>
+<div id="nav_menu-4" class="widget col-sm-4 widget_nav_menu"><h4 class="widgettitle">About</h4><ul id="menu-about" class="menu"><li class="menu-about-baeldung"><a href="http://www.baeldung.com/about/">About Baeldung</a></li>
+<li class="menu-the-courses"><a href="http://courses.baeldung.com/">The Courses</a></li>
+<li class="menu-meta-baeldung"><a href="http://meta.baeldung.com/">Meta Baeldung</a></li>
+<li class="menu-the-full-archive"><a href="http://www.baeldung.com/full_archive">The Full Archive</a></li>
+<li class="menu-write-for-baeldung"><a href="http://www.baeldung.com/contribution-guidelines">Write for Baeldung</a></li>
+<li class="menu-privacy-policy"><a href="http://www.baeldung.com/privacy-policy">Privacy Policy</a></li>
+<li class="menu-terms-of-service"><a href="http://www.baeldung.com/terms-of-service">Terms of Service</a></li>
+<li class="menu-contact"><a href="http://www.baeldung.com/contact">Contact</a></li>
+<li class="menu-company-info"><a href="http://www.baeldung.com/baeldung-company-info">Company Info</a></li>
+<li class="menu-advertise-on-the-java-weekly"><a href="http://www.baeldung.com/java-weekly-sponsorship">Advertise on the Java Weekly</a></li>
+<li class="menu-consulting-work"><a title="My Consulting Engagements" href="http://www.baeldung.com/consulting">Consulting Work</a></li>
+</ul></div> </div>
+<div class="col-xs-12 visible-xs">
+<img src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/whiteleaf.svg" id="footer-logo1" class="center-block" alt="Baeldung Logo">
+</div>
+</div>
+
+
+</div> 
+</footer> 
+ 
+<!--[if lt IE 7 ]>
+  			<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+  			<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+		<![endif]-->
+<div data-placeholder="ad"></div>
+<div id="survey-container">
+<div class="survey-collapse-bar">
+<a href="http://www.baeldung.com/hibernate-one-to-many#" class="close-survey"></a>
+</div>
+<div class="survey-question"></div>
+<ul class="survey-answers"></ul>
+</div><style>
+  iframe[name='google_conversion_frame'] { 
+    height: 0 !important;
+    width: 0 !important; 
+    line-height: 0 !important; 
+    font-size: 0 !important;
+    margin-top: -13px;
+    float:left;
+}
+
+#carbonads {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: solid 1px #e6e6e6;
+  border-radius: 6px;
+  background-color: #f8f8f8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#carbonads a:hover {
+  text-decoration: none;
+}
+
+#carbonads span {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.carbon-img {
+  float: left;
+  margin-right: 1em;
+}
+
+.carbon-img img {
+  display: block;
+}
+
+.carbon-text {
+  display: block;
+  float: left;
+  max-width: calc(100% - 130px - 1em);
+  text-align: left;
+}
+
+.carbon-poweredby {
+  position: absolute;
+  bottom: 0;
+  left: 143px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 9px;
+  line-height: 1;
+}
+
+</style>
+
+<script>
+jQuery(window).load(function(){
+    setTimeout( function(){
+      jQuery('.like_box_slideup_close .sidbar_slide_header').trigger('click');
+    },'10000');
+});
+</script>
+<style>
+  .main_sidbar_slide {
+    top: 40%;
+}
+</style>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var count;
+        if ( !jQuery.cookie('wwsgd_visits') ) {
+            count = 1;
+        }
+        else {
+            count = parseInt(jQuery.cookie('wwsgd_visits'), 10) + 1;
+        }
+        jQuery.cookie('wwsgd_visits', count, { expires: 365, path: "/" });
+
+        if ( count <= 20 ) {
+            jQuery(".wwsgd").show();
+        }
+    });
+</script>
+
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/shCore.js.download"></script>
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/shAutoloader.js.download"></script>
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/shBrushXml.js.download"></script>
+<script type="text/javascript">//<![CDATA[
+	SyntaxHighlighter.autoloader(
+	"applescript	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAppleScript.js?ver=3.0"
+	,"as3 actionscript3	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0"
+	,"bash shell	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0"
+	,"cf coldfusion	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0"
+	,"cpp c	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0"
+	,"c# c-sharp csharp	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0"
+	,"css	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0"
+	,"delphi pas pascal	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0"
+	,"diff patch	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0"
+	,"erl erlang	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0"
+	,"groovy	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0"
+	,"java	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0"
+	,"jfx javafx	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0"
+	,"js jscript javascript	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0"
+	,"perl pl	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0"
+	,"php	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0"
+	,"plain text	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0"
+	,"ps powershell	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0"
+	,"py python	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0"
+	,"rails ror ruby rb	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0"
+	,"sass scss	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSass.js?ver=3.0"
+	,"scala	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0"
+	,"sql	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0"
+	,"vb vbnet	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0"
+	,"xml xhtml xslt html	http://www.baeldung.com/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0"
+	);
+	SyntaxHighlighter.defaults['auto-links'] = true;
+	SyntaxHighlighter.defaults['quick-code'] = true;
+	SyntaxHighlighter.defaults['title'] = '';
+	SyntaxHighlighter.defaults['class-name'] = 'notranslate';
+	SyntaxHighlighter.defaults['collapse'] = false;
+	SyntaxHighlighter.defaults['first-line'] = 1;
+	SyntaxHighlighter.defaults['gutter'] = true;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['smart-tabs'] = true;
+	SyntaxHighlighter.defaults['tab-size'] = 4;
+	SyntaxHighlighter.defaults['toolbar'] = true;
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = "Can't find brush for: ";
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = "Brush wasn't configured for html-script option: ";
+	SyntaxHighlighter.all();
+	
+//]]></script>
+
+<span style="display:none" class="tl-placeholder-f-type-ribbon"></span><script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/triggers.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tve_frontend_options = {"is_editor_page":"","page_events":[],"is_single":"1","ajaxurl":"http:\/\/www.baeldung.com\/wp-admin\/admin-ajax.php","social_fb_app_id":"","dash_url":"http:\/\/www.baeldung.com\/wp-content\/plugins\/thrive-visual-editor\/thrive-dashboard","translations":{"Copy":"Copy"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/frontend.min.js.download"></script>
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/jquery.form.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/www.baeldung.com\/wp-admin\/admin-ajax.php","is_crawler":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+var q2w3_sidebar_options = new Array();
+q2w3_sidebar_options[0] = { "sidebar" : "sidebar1", "margin_top" : 50, "margin_bottom" : 0, "stop_id" : "inner-footer", "screen_max_width" : 1169, "screen_max_height" : 599, "width_inherit" : false, "refresh_interval" : 100, "window_load_hook" : false, "disable_mo_api" : true, "widgets" : ['text-2','widget_thrive_leads-4'] };
+</script>
+<script type="text/javascript" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/wp-embed.min.js.download"></script>
+<script type="text/javascript">
+      function svginit_veggieBurger() {
+        var svgTarget = document.getElementById('veggieBurger');
+        if (svgTarget) {
+          veggieBurger  = new Vivus('veggieBurger', {type: 'delayed', duration: 30,  start: 'autostart'});
+        }
+      }
+      document.addEventListener("DOMContentLoaded", svginit_veggieBurger);
+    
+
+          function svginit_17021() {
+            IcnCoursesRestWithSpring = new Vivus('IcnCoursesRestWithSpring', {type: 'delayed', duration: 60,  start: 'manual'});
+IcnCoursesLearnSpringSecurity = new Vivus('IcnCoursesLearnSpringSecurity', {type: 'delayed', duration: 60,  start: 'manual'});
+            
+          document.getElementById('menu-item-17021').onmouseenter = function(){
+            IcnCoursesRestWithSpring.reset().play();
+IcnCoursesLearnSpringSecurity.reset().play();
+          };
+        
+          }
+          document.addEventListener("DOMContentLoaded", svginit_17021);
+        
+
+          function svginit_17022() {
+            IcnGuidesPersistence = new Vivus('IcnGuidesPersistence', {type: 'delayed', duration: 60,  start: 'manual'});
+IcnGuidesRest = new Vivus('IcnGuidesRest', {type: 'delayed', duration: 60,  start: 'manual'});
+IcnGuidesSecurity = new Vivus('IcnGuidesSecurity', {type: 'delayed', duration: 60,  start: 'manual'});
+            
+          document.getElementById('menu-item-17022').onmouseenter = function(){
+            IcnGuidesPersistence.reset().play();
+IcnGuidesRest.reset().play();
+IcnGuidesSecurity.reset().play();
+          };
+        
+          }
+          document.addEventListener("DOMContentLoaded", svginit_17022);
+        
+
+          function svginit_6138() {
+            IcnAboutMarketingExperiments = new Vivus('IcnAboutMarketingExperiments', {type: 'delayed', duration: 60,  start: 'manual'});
+IcnAboutFullArchive = new Vivus('IcnAboutFullArchive', {type: 'delayed', duration: 60,  start: 'manual'});
+IcnAboutWriteForBaeldung = new Vivus('IcnAboutWriteForBaeldung', {type: 'delayed', duration: 60,  start: 'manual'});
+IcnAboutBaeldung = new Vivus('IcnAboutBaeldung', {type: 'delayed', duration: 60,  start: 'manual'});
+            
+          document.getElementById('menu-item-6138').onmouseenter = function(){
+            IcnAboutMarketingExperiments.reset().play();
+IcnAboutFullArchive.reset().play();
+IcnAboutWriteForBaeldung.reset().play();
+IcnAboutBaeldung.reset().play();
+          };
+        
+          }
+          document.addEventListener("DOMContentLoaded", svginit_6138);
+        
+
+          function svginit_IcnRSS() {
+            IcnRSS = new Vivus('IcnRSS', {type: 'delayed', duration: 60,  start: 'autostart'});
+            
+          document.getElementById('menu-item-18864').onmouseenter = function(){
+            IcnRSS.reset().play();
+          };
+        
+          }
+          document.addEventListener("DOMContentLoaded", svginit_IcnRSS);
+        
+</script>
+<script type="text/javascript">/*<![CDATA[*/var THO_Front = THO_Front || {}; THO_Front.data = {"end_of_content_id":"tho-end-content","is_single":true,"log_url":"http:\/\/www.baeldung.com\/wp-json\/tho\/v1\/logs","active_triggers":{"viewport":"thrive_headline"},"log_engagements":[],"post_id":17111,"test_id":0,"const":{"_e_click":1,"_e_scroll":2,"_e_time":3,"_impression":1,"_engagement":2}}/*]]> */</script><script type="text/javascript">/*<![CDATA[*/if ( !window.TL_Const ) var TL_Const={"security":"4c303e5937","ajax_url":"\/\/www.baeldung.com\/wp-admin\/admin-ajax.php","forms":[],"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":1,"main_group_id":20291,"display_options":{"allowed_post_types":[],"flag_url_match":false},"custom_post_data":{"http_referrer":"https:\/\/www.google.lt\/"},"current_screen":{"screen_type":4,"screen_id":17111},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin"]}/*]]> */</script> <script type="text/javascript" defer="" src="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/autoptimize_406c87e6730da6e334469ec9a62a845a.js.download"></script>
+
+<script type="text/javascript">
+	(function ($) {
+	$(function () {
+		var event_data = {"form_id":"tve-leads-track-widget-407","form_type":"widget"};
+		event_data.source = 'page_load';
+		setTimeout(function () {
+			ThriveGlobal.$j(TL_Front).trigger('showform.thriveleads', event_data);
+			}, 200);
+		});
+	})
+(ThriveGlobal.$j);
+</script><link rel="stylesheet" id="backwpup-css" href="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/backwpup.min.css" type="text/css" media="screen">
+<link rel="stylesheet" id="tve-leads-font-9062833c9baa57b288ba47a7993dc1c0-css" href="./Hibernate One to Many Annotation Tutorial _ Baeldung_files/css(1)" type="text/css" media="all">
+</body></html>

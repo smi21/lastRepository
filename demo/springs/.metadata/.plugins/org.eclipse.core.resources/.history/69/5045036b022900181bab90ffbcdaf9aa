@@ -1,0 +1,23 @@
+package com.mccoy.providers;
+
+
+
+public class Mydto 
+{
+	String bankname;
+    public String getBankname() {
+		return bankname;
+	}
+	public void setBankname(String bankname) {
+		this.bankname = bankname;
+	}
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+	int rate;
+	
+
+}

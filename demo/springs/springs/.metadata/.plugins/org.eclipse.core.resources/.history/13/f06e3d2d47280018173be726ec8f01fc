@@ -1,0 +1,76 @@
+package com.mccoy.consumer;
+import java.net.URI;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+
+import org.glassfish.jersey.client.ClientConfig;
+
+public class client 
+{
+	public static void main(String[] args) 
+	{
+		Scanner sc=new Scanner(System.in);
+		ClientConfig config = new ClientConfig();
+
+		System.out.println("client configured");
+
+		Client client = ClientBuilder.newClient(config);
+		System.out.println("new client");
+
+		WebTarget target = client.target(getBaseURI());
+		System.out.println(target);
+		System.out.println("geturl done");
+		String response = target.path("rest").path("bankservices").request().accept(MediaType.TEXT_PLAIN).get(Response.class).toString();
+		System.out.println(response);
+
+
+		HashMap<String, Integer> plainAnswer =target.path("rest").path("bankservices").request().accept(MediaType.APPLICATION_JSON).get(HashMap.class);
+		//System.out.println(plainAnswer);
+		Set c=plainAnswer.keySet();
+		Iterator iterator=c.iterator();
+		while(iterator.hasNext())
+		{
+			String key=(String) iterator.next();
+			Object value=plainAnswer.get(key);
+			System.out.println(key+" -- "+value);
+		}
+		
+		/*   String response = target.path("rest").path("sbi").request().accept(MediaType.TEXT_PLAIN).get(Response.class).toString();
+        System.out.println(response);
+
+        String plainAnswer =
+                target.path("rest").path("sbi").request().accept(MediaType.TEXT_PLAIN).get(String.class);
+     /*   String xmlAnswer =
+                target.path("rest").path("canara").request().accept(MediaType.TEXT_PLAIN).get(String.class);
+        String htmlAnswer=
+                target.path("rest").path("icici").request().accept(MediaType.TEXT_PLAIN).get(String.class);*/
+
+		//System.out.println(response);
+		// System.out.println(plainAnswer);
+		//   System.out.println(xmlAnswer);
+		// System.out.println(htmlAnswer);
+
+
+
+
+
+
+
+	}
+	private static URI getBaseURI() 
+	{
+		return UriBuilder.fromUri("http://localhost:8050/Restprovider").build();
+	}
+
+}

@@ -1,0 +1,15 @@
+package com.mccoy;
+
+import org.glassfish.jersey.client.ClientConfig;
+
+public class Client 
+{
+	static final String REST_URI = "http://localhost:8080/restful";
+	 
+	 public static void main(String[] args)
+	 {
+	 
+	
+
+}
+}

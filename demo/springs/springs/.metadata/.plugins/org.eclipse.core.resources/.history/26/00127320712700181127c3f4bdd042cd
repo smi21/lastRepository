@@ -1,0 +1,8 @@
+package com.mccoy.restfulservice;
+
+import javax.ws.rs.Path;
+
+@Path("sbi")
+public class Sbi {
+
+}

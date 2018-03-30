@@ -1,0 +1,24 @@
+package com.mccoy.providers;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.ws.rs.Path;
+
+@Path("bankservices")
+public class Myservices 
+{
+	
+	public Map getservice()
+	{
+		Map map=new HashMap<>();
+		map.put("SBI",3);
+		map.put("Canara",4);
+		map.put("ICICI", 5);
+		return map;
+		
+	}
+   
+	
+	
+}

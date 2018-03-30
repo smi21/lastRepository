@@ -1,0 +1,30 @@
+package com.mccoy;
+
+
+public class Pojo 
+{
+private String name;
+private String pasword;
+
+public Pojo() {
+	// TODO Auto-generated constructor stub
+}
+
+public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public String getPasword() {
+	return pasword;
+}
+
+public void setPasword(String pasword) {
+	this.pasword = pasword;
+}
+
+
+}

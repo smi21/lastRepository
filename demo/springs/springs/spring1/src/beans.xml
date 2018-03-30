@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="si" class="com.mccoy.hellodemo.SimpleInterest" init-method="init" destroy-method="destroy">
+	<property name="years">
+	<value>3</value>
+	</property>
+	<property name="principal_amount">
+	<value>20000</value>
+	</property>
+	<property name="rate">
+	<value>2.5</value>
+	</property>
+	</bean>
+	
+   <bean id="ci" class="com.mccoy.hellodemo.CompundInterest">
+   <constructor-arg value="3"></constructor-arg>
+   <constructor-arg value="20000"></constructor-arg>
+   <constructor-arg value="2.5"></constructor-arg>
+</bean>
+</beans>

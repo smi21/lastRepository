@@ -1,0 +1,22 @@
+package com.mccoy.providers;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.ws.rs.Path;
+
+@Path("bankservices")
+public class Myservices 
+{
+	
+	public Map getservice()
+	{
+		Map map=new HashMap<>();
+		
+		return map;
+		
+	}
+   
+	
+	
+}

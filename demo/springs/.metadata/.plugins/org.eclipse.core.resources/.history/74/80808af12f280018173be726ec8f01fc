@@ -1,0 +1,9 @@
+package com.mccoy.providers;
+
+@path(bankservices)
+public class Myservices 
+{
+   
+	
+	
+}

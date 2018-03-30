@@ -1,0 +1,25 @@
+package com.mccoy.providers;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+@Path("postdata")
+public class Postdata 
+{
+	@GET
+	public void post()
+	{
+		System.out.println("post started");
+		Mydto dto=new Mydto();
+		dto.setBankname("SBI");
+		dto.setRate(3);
+		Mydao dao=new Mydao();
+		dao.save(dto);
+		
+		
+		
+	}
+
+}

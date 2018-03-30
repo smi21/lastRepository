@@ -1,0 +1,9 @@
+package com.mccoy.restfulservice;
+
+public class Myresource 
+{
+   public String getmessage()
+   {
+	   return "Hello world...!!";
+   }
+}

@@ -1,0 +1,14 @@
+package com.mccoy;
+
+
+public class Client 
+{
+	static final String REST_URI = "http://localhost:8080/restfulservice";
+	 
+	 public static void main(String[] args)
+	 {
+	 
+	
+
+}
+}

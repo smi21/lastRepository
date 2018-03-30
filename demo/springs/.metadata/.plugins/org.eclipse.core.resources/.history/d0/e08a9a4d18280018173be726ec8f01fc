@@ -1,0 +1,20 @@
+package com.mccoy.restfulservice;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("sbi")
+public class Sbi
+{
+
+   @GET
+   @Produces(MediaType.TEXT_PLAIN)
+   public int getmessage()
+   {
+	int rate=2
+	return rate;
+	}
+	
+}

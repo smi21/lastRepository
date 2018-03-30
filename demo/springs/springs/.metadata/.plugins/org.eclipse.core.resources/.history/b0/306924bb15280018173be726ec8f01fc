@@ -1,0 +1,37 @@
+package com.mccoy;
+
+
+
+public class Client 
+{
+	 ClientConfig config = new ClientConfig();
+
+     System.out.println("client configured");
+     
+     Client client = ClientBuilder.newClient(config);
+      System.out.println("new client");
+
+     WebTarget target = client.target(getBaseURI());
+     System.out.println(target);
+     System.out.println("geturl done");
+     String response = target.path("rest").path("sbi").request().accept(MediaType.TEXT_PLAIN).get(Response.class).toString();
+     System.out.println(response);
+
+     String plainAnswer =
+             target.path("rest").path("sbi").request().accept(MediaType.TEXT_PLAIN).get(String.class);
+  /*   String xmlAnswer =
+             target.path("rest").path("canara").request().accept(MediaType.TEXT_PLAIN).get(String.class);
+     String htmlAnswer=
+             target.path("rest").path("icici").request().accept(MediaType.TEXT_PLAIN).get(String.class);*/
+
+     //System.out.println(response);
+     System.out.println(plainAnswer);
+  //   System.out.println(xmlAnswer);
+    // System.out.println(htmlAnswer);
+ }
+ private static URI getBaseURI() 
+ {
+     return UriBuilder.fromUri("http://localhost:8080/com.mccoy.restfulservice").build();
+ }
+
+}

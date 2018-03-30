@@ -1,0 +1,23 @@
+SimpleMailMessage message=new SimpleMailMessage();
+			message.setTo("rittishalini@gmail.com");
+			message.setSubject("new password");
+			message.setText("hi user,latest password is :"+randompwd);
+		sender.send(message);
+
+
+
+
+
+
+
+
+
+jdbc.url=jdbc:log4jdbc:oracle:thin:@mybdd:1521:smt
+jdbc.driverClass=net.sf.log4jdbc.DriverSpy
+
+
+
+
+
+
+https://www.youtube.com/watch?v=xn1bm4U1cgw     

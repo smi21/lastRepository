@@ -1,0 +1,9 @@
+package com.mccoy.providers;
+
+public class Mydto 
+{
+	String bankname;
+    int rate;
+	
+
+}

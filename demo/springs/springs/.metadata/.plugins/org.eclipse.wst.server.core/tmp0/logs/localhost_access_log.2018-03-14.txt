@@ -1,0 +1,11 @@
+127.0.0.1 - - [14/Mar/2018:19:00:31 +0530] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [14/Mar/2018:19:00:33 +0530] "GET /Restful/ HTTP/1.1" 404 1010
+0:0:0:0:0:0:0:1 - - [14/Mar/2018:19:01:29 +0530] "GET /Restful/rest/sbi HTTP/1.1" 200 1
+127.0.0.1 - - [14/Mar/2018:19:01:37 +0530] "GET /com.mccoy.restfulservice/rest/sbi HTTP/1.1" 404 1060
+127.0.0.1 - - [14/Mar/2018:19:01:37 +0530] "GET /com.mccoy.restfulservice/rest/sbi HTTP/1.1" 404 1060
+127.0.0.1 - - [14/Mar/2018:19:02:39 +0530] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [14/Mar/2018:19:02:40 +0530] "GET /Restful/ HTTP/1.1" 404 1010
+127.0.0.1 - - [14/Mar/2018:19:02:52 +0530] "GET /com.mccoy.restfulservice/rest/sbi HTTP/1.1" 404 1060
+127.0.0.1 - - [14/Mar/2018:19:02:52 +0530] "GET /com.mccoy.restfulservice/rest/sbi HTTP/1.1" 404 1060
+127.0.0.1 - - [14/Mar/2018:19:04:20 +0530] "GET /com.mccoy.restfulservice/rest/sbi HTTP/1.1" 404 1060
+127.0.0.1 - - [14/Mar/2018:19:04:20 +0530] "GET /com.mccoy.restfulservice/rest/sbi HTTP/1.1" 404 1060

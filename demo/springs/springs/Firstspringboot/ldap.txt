@@ -1,0 +1,28 @@
+The most common use of an LDAP, a use based on a conception of LDAP as a narrow type of enterprise management tool, is as a central authority on network users, groups, and accounts. An LDAP directory stores information on each user account for the network—information like username, password, full name, and email address. Other services on the network, from workstations to email servers to web applications, can use LDAP as an authoritative source of user information. Applications can authenticate users against the directory. A single user account can be shared across multiple (perhaps all) enterprise applications.
+
+Compared to an RDB, LDAP can also be seen as a storage system. Rather
+than presenting data in tabular structures, though, LDAP stores entries in a
+hierarchy (like a file system). The basic relationships in an LDAP consist of the superior-to-subordinate relation (one to many), and the subordinate-to-superior relation (one-to-one), though other relationships can be used.
+
+
+
+Working with views
+Spring MVC provides a very flexible view resolution mechanism that is fully decoupled from the other elements of the MVC framework. It does not force you to use a particular view technology; rather, it makes it easier to use your own favorite technology. It even allows you to mix and match multiple technologies at the view tier. Spring MVC provides out-of-the-box support for JPS, XSLT, and Velocity views.
+
+Resolving views
+In a typical Spring MVC application, the developer chooses a view technology of his choice and accordingly uses a ViewResolver that resolves views built using that technology.
+
+The component responsible for resolving views in a Spring MVC application is org.springframework.web.servlet.ViewResolver. It maps logical view names with physical view resources and the chosen view technology.
+
+All request-handling methods of controllers must resolve a logical view name by either returning a view name, a view object, or a ModelAndView object. The org.springframework.web.servlet.View object prepares HttpRequest for the consumption of the chosen view technology.
+
+Spring MVC comes with a set of convenient view...
+
+<!--  <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:component-scan base-package="com.mccoy.mvcapp" />
+    <context:annotation-config />
+    
+    
+    
+    </beans> -->

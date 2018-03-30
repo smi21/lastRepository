@@ -1,0 +1,13 @@
+package com.mccoy.restfulservice;
+
+import javax.ws.rs.Path;
+
+@Path("hello")
+public class Myresource 
+{
+	
+   public String getmessage()
+   {
+	   return "Hello world...!!";
+   }
+}
